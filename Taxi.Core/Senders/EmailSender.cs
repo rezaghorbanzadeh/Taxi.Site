@@ -14,10 +14,32 @@ namespace Taxi.Core.Senders
     static class EmailSender
     {
 
-        public static void SendGmail()
+        public static void SendGmail(string toUser , string subject , string bodyEmail)
         {
+            var password = "";
             var myMail = "";
             var mail = new MailMessage();
+            var smtpServer = new SmtpClient("");
+
+            mail.From = new MailAddress(myMail, "تاکسی");
+            mail.To.Add(toUser);
+            mail.Subject = subject;
+            mail.Body = bodyEmail;
+            mail.IsBodyHtml = true;
+            smtpServer.Port = 0;
+            smtpServer.Credentials = new NetworkCredential(myMail , password);
+            smtpServer.EnableSsl = false;
+
+            try
+            {
+                smtpServer.Send(mail);
+               
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("خطا در ارسال ایمیل: " + ex.Message);
+            }
+            
         }
     }
 }
