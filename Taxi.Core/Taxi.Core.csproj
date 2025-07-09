@@ -10,7 +10,6 @@
     <Folder Include="Interfaces\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Services\" />
-    <Folder Include="Securities\" />
   </ItemGroup>
 
   <ItemGroup>
