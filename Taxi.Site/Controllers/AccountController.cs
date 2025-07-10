@@ -34,7 +34,7 @@ namespace Taxi.Site.Controllers
             return View(viewModel);
         }
         [HttpGet]
-        private IActionResult Active()
+        public IActionResult Active()
         {
 
             // ViewBag.IsError = false;
@@ -42,7 +42,7 @@ namespace Taxi.Site.Controllers
         }
 
         [HttpPost]
-        private async Task<IActionResult>  Active(ActiveViewModel viewModel)
+        public async Task<IActionResult>  Active(ActiveViewModel viewModel)
         {
             if (ModelState.IsValid) { 
             User user = await _accounting.ActiveCode(viewModel);
