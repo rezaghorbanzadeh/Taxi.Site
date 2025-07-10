@@ -33,11 +33,31 @@ namespace Taxi.Site.Controllers
             }
             return View(viewModel);
         }
-
-        private object Active()
+        [HttpGet]
+        private IActionResult Active()
         {
+
+            // ViewBag.IsError = false;
             return View();
         }
+
+        [HttpPost]
+        private async Task<IActionResult>  Active(ActiveViewModel viewModel)
+        {
+            if (ModelState.IsValid) { 
+            User user = await _accounting.ActiveCode(viewModel);
+                if (user != null) { 
+                ViewBag.IsError = false ;
+                    // 
+                }
+            }
+            return View(viewModel);
+        }
+
+
+
+
+
 
         
     }

@@ -23,7 +23,7 @@ namespace Taxi.DataAccessLayer.Entites
         public string UserName { get; set; }
 
         [Display(Name = " کد ورورد")]
-        [MaxLength(6)]
+        [MaxLength(100)]
         public string Password { get; set; }
 
         [Display(Name = "توکن")]

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Identity.Client;
 using Taxi.Core.Generators;
 using Taxi.Core.Interfaces;
+using Taxi.Core.Securities;
 using Taxi.Core.Senders;
 using Taxi.Core.ViewModels;
 using Taxi.DataAccessLayer.Context;
@@ -22,6 +23,23 @@ namespace Taxi.Core.Services
             _context = context;
         }
 
+        #region Active code
+        public async Task<User> ActiveCode(ActiveViewModel viewModel)
+        {
+            string password = HashEncode.GetHashCode(CodeGenerator.GetActiveCode());
+
+            User user = _context.Users.SingleOrDefault(u=>u.Password == password);
+
+            if (user == null) 
+            { 
+                user.IsActive = true;
+                user.Password = HashEncode.GetHashCode(CodeGenerator.GetActiveCode());
+                _context.SaveChanges();       
+            }
+
+            return await Task.FromResult(user); 
+        }
+        #endregion
         public bool CheckMobileNumber(string username)
         {
             return _context.Users.Any( u => u.UserName == username);
@@ -49,13 +67,14 @@ namespace Taxi.Core.Services
         {
            if (!CheckMobileNumber(viewModel.Username))
             {
+                string code = CodeGenerator.GetActiveCode();
                 User user = new User()
                 {
                     IsActive = false,
                     Id = CodeGenerator.GetId(),
-                    Password = CodeGenerator.GetActiveCode(),
+                    Password = HashEncode.GetHashCode(code),
                     RoleId = GetRoleByName("user"),
-                    Token = null,
+                    Token = code,
                     UserName = viewModel.Username,
                 };
                 _context.Users.Add(user);
@@ -74,7 +93,7 @@ namespace Taxi.Core.Services
 
                 try
                 {
-                    SmsSender.VeryFySend(user.UserName, "", user.Password);
+                    SmsSender.VeryFySend(user.UserName, "", code);
                 }
                 catch (Exception)
                 {
@@ -90,7 +109,7 @@ namespace Taxi.Core.Services
                 User user = await GetUser(viewModel.Username);
                 string code = CodeGenerator.GetActiveCode();
 
-                UpdatePasswordGuid(user.Id, code);
+                UpdatePasswordGuid(user.Id, HashEncode.GetHashCode(code));
 
                 try
                 {
@@ -109,7 +128,7 @@ namespace Taxi.Core.Services
         {
             User user = _context.Users.Find(Id);
 
-            user.Password = code;
+            user.Password = HashEncode.GetHashCode(code);
             _context.SaveChanges();
         }
     }

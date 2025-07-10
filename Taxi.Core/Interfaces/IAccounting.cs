@@ -13,14 +13,13 @@ namespace Taxi.Core.Interfaces
         //if mobile exist
         bool CheckMobileNumber(string username);
 
-
         Task<User> RegisterUser(RegisterViewModel viewModel);
 
         Guid GetRoleByName(string name);
 
         Task<User> GetUser(string username);
-
-
         void UpdatePasswordGuid(Guid Id , string code);
+
+        Task<User> ActiveCode(ActiveViewModel viewModel);
     }
 }

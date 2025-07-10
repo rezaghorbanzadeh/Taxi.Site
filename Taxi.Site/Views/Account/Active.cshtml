@@ -1,0 +1,26 @@
+﻿@model Taxi.Core.ViewModels.ActiveViewModel;
+@{
+    ViewData["Title"] = "‌فعال سازی کاربر";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+
+<div class="form-container">
+    <h2>فعال سازی  </h2>
+    <form method="post" asp-controller="Account" asp-action="Active">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label for="Code">شماره تلفن</label>
+            <input type="text" name="Code" id="Code" placeholder="مثل :0909909090" required />
+            <span asp-validation-for="Code" style="color:red"></span>
+            @if (ViewBag.IsError = true)
+            {
+                <span  style="color:red"> کد اشتباه است</span>
+
+            }
+        </div>
+        <button type="submit" class="btn">فعال</button>
+
+    </form>
+  
+</div>
