@@ -26,15 +26,14 @@ namespace Taxi.Core.Services
         #region Active code
         public async Task<User> ActiveCode(ActiveViewModel viewModel)
         {
-            string password = HashEncode.GetHashCode(CodeGenerator.GetActiveCode());
 
-            User user = _context.Users.SingleOrDefault(u=>u.Password == password);
+            User user = _context.Users.SingleOrDefault(u=>u.UserName == viewModel.Username);
 
-            if (user == null) 
-            { 
+            if (user != null && HashEncode.Verify(viewModel.Code.Trim(), user.Password.Trim()))
+            {
                 user.IsActive = true;
                 user.Password = HashEncode.GetHashCode(CodeGenerator.GetActiveCode());
-                _context.SaveChanges();       
+                _context.SaveChanges();
             }
 
             return await Task.FromResult(user); 

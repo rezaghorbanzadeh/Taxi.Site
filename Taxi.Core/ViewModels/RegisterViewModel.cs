@@ -14,6 +14,8 @@ namespace Taxi.Core.ViewModels
         [MaxLength(11,ErrorMessage ="شماره موبایل نمیتواند کمتر از 11 کاراکتر باشد")]
         [MinLength(11,ErrorMessage = "شماره موبایل نمیتواند بیشتر از 11 کاراکتر باشد")]
         [Phone(ErrorMessage ="شماره مبایل معتبر وارد کنید")]
-        public string Username { get; set; }
+        public string Username { get; set; }     
+        
+
     }
 }

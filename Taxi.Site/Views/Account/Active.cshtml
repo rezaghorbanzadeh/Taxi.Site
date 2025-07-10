@@ -4,7 +4,22 @@
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
+<script>
+        
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
 
+       
+        document.addEventListener("DOMContentLoaded", function() {
+            const username = getQueryParam("username");
+            if (username) {
+                document.getElementById("Username").value = username;
+            }
+        });
+
+ </script>
 <div class="form-container">
     <h2>فعال سازی  </h2>
     <form method="post" asp-controller="Account" asp-action="Active">
@@ -12,8 +27,9 @@
         <div class="form-group">
             <label for="Code">شماره تلفن</label>
             <input type="text" name="Code" id="Code" placeholder="مثل :0909909090" required />
+            <input type="hidden" asp-for="Username" />
             <span asp-validation-for="Code" style="color:red"></span>
-            @if (ViewBag.IsError = true)
+            @if (ViewBag.IsError == true)
             {
                 <span  style="color:red"> کد اشتباه است</span>
 

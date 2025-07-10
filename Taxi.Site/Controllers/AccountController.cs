@@ -26,25 +26,27 @@ namespace Taxi.Site.Controllers
             if (ModelState.IsValid) { 
                 User user  =await _accounting.RegisterUser(viewModel);
 
-                if (user != null) { 
-                return RedirectToAction(nameof(Active));
+                if (user != null) {
+                    return RedirectToAction("Active", new { username = user.UserName });
+
                 }
-            
+
             }
-            return View(viewModel);
+            return View(viewModel );
         }
         [HttpGet]
         public IActionResult Active()
         {
 
-            // ViewBag.IsError = false;
-            return View();
+             ViewBag.IsError = false;
+            return View("Active");
         }
 
         [HttpPost]
         public async Task<IActionResult>  Active(ActiveViewModel viewModel)
         {
             if (ModelState.IsValid) { 
+               
             User user = await _accounting.ActiveCode(viewModel);
                 if (user != null) { 
                 ViewBag.IsError = false ;

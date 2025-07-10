@@ -20,8 +20,8 @@ namespace Taxi.DataAccessLayer.Entites
         [Display(Name = "نام کاربری")]
         [Required]
         [MaxLength(11)]
-        public string UserName { get; set; }
 
+        public string UserName { get; set; }
         [Display(Name = " کد ورورد")]
         [MaxLength(100)]
         public string Password { get; set; }
