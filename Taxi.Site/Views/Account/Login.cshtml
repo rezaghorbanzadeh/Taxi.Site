@@ -1,0 +1,26 @@
+﻿@model Taxi.Core.ViewModels.RegisterViewModel;
+@{
+    ViewData["Title"] = "ثبت‌نام";
+}
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+<!-- Login 13 - Bootstrap Brain Component -->
+<div class="form-container">
+    <h2>ورود</h2>
+    <form method="post" asp-controller="Account" asp-action="Register">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label for="email">ایمیل</label>
+            <input type="email" id="email" placeholder="ایمیل خود را وارد کنید" required />
+        </div>
+        <div class="form-group">
+            <label for="password">رمز عبور</label>
+            <input type="password" id="password" placeholder="رمز عبور" required />
+        </div>
+        <button type="submit" class="btn">ورود</button>
+    </form>
+    <div class="switch-link">حساب کاربری ندارید؟ ثبت‌نام کنید</div>
+</div>

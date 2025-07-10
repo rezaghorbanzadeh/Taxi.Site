@@ -1,0 +1,23 @@
+﻿@model Taxi.Core.ViewModels.RegisterViewModel;
+@{
+    ViewData["Title"] = "ثبت‌نام";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+
+
+<!-- Login 13 - Bootstrap Brain Component -->
+<div class="form-container">
+    <h2>ثبت نام </h2>
+    <form method="post" asp-controller="Account" asp-action="Register">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label for="phone">شماره تلفن</label>
+            <input type="text" name="Username" id="phone" placeholder="مثل :0909909090" required />
+            <span asp-validation-for="Username" style="color:red"></span>
+        </div>
+        <button type="submit" class="btn">ورود</button>
+       
+    </form>
+    <div class="switch-link">حساب کاربری ندارید؟ ثبت‌نام کنید</div>
+</div>

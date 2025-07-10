@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Taxi.Core.Interfaces;
+using Taxi.Core.Services;
 using Taxi.DataAccessLayer.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,7 @@ IConfiguration configuration = new ConfigurationBuilder()
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IAccounting, AccouuntService>();
 
 #region Config DataBase
 builder.Services.AddDbContext<DatabaseContext>(option =>

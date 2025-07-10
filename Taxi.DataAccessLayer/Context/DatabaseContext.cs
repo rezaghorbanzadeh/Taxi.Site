@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Taxi.DataAccessLayer.Entites;
 
 namespace Taxi.DataAccessLayer.Context
 {
@@ -12,6 +13,11 @@ namespace Taxi.DataAccessLayer.Context
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { 
 
         }
+
+
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserDetail> UserDetails { get; set; }
         
     }
 }
