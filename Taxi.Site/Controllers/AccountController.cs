@@ -34,6 +34,31 @@ namespace Taxi.Site.Controllers
             }
             return View(viewModel );
         }
+
+        [HttpGet]
+        public IActionResult Driver()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Driver(RegisterViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _accounting.RegisterDriver(viewModel);
+
+                if (user != null)
+                {
+                    return RedirectToAction("Active", new { username = user.UserName });
+
+                }
+
+            }
+            return View(viewModel);
+        }
+
+
         [HttpGet]
         public IActionResult Active()
         {

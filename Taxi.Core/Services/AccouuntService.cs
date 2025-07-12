@@ -62,6 +62,82 @@ namespace Taxi.Core.Services
             return await Task.FromResult(_context.Users.SingleOrDefault(u => u.UserName == username));
         }
 
+        public async Task<User> RegisterDriver(RegisterViewModel viewModel)
+        {
+            if (!CheckMobileNumber(viewModel.Username))
+            {
+                string code = CodeGenerator.GetActiveCode();
+                User user = new User()
+                {
+                    IsActive = false,
+                    Id = CodeGenerator.GetId(),
+                    Password = HashEncode.GetHashCode(code),
+                    RoleId = GetRoleByName("driver"),
+                    Token = code,
+                    UserName = viewModel.Username,
+                };
+                _context.Users.Add(user);
+
+                UserDetail userDetail = new UserDetail()
+                {
+                    Id = user.Id,
+                    BirthDate = null,
+                    Date = DataTimeGenerator.GetShamsiDate(),
+                    Time = DataTimeGenerator.GetShamsiTime(),
+                    FullName = null,
+                };
+
+                _context.UserDetails.Add(userDetail);
+                Driver driver = new Driver()
+                {
+                        UserId = user.Id,
+                        CaraId = null,
+                        IsConfirm = false,
+                        Address = null,
+                        CarCode = null,
+                        CarColorId = null,
+                        CarImg = null,
+                        Tel = null,
+                        NationalCode = null,    
+                        Avatar = null,
+                };
+                _context.Drivers.Add(driver);
+                _context.SaveChanges();
+
+                try
+                {
+                    SmsSender.VeryFySend(user.UserName, "", code);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                return await Task.FromResult(user);
+
+
+            }
+            else
+            {
+                User user = await GetUser(viewModel.Username);
+                string code = CodeGenerator.GetActiveCode();
+
+                UpdatePasswordGuid(user.Id, HashEncode.GetHashCode(code));
+
+                try
+                {
+                    SmsSender.VeryFySend(user.UserName, "", code);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                return await Task.FromResult(user);
+            }
+        }
+
+        #region Register User
         public async Task<User> RegisterUser(RegisterViewModel viewModel)
         {
            if (!CheckMobileNumber(viewModel.Username))
@@ -122,7 +198,11 @@ namespace Taxi.Core.Services
                 return await Task.FromResult(user);
             }
         }
+        #endregion
 
+
+
+        #region Update Password
         public void UpdatePasswordGuid(Guid Id, string code)
         {
             User user = _context.Users.Find(Id);
@@ -130,5 +210,7 @@ namespace Taxi.Core.Services
             user.Password = HashEncode.GetHashCode(code);
             _context.SaveChanges();
         }
+
+        #endregion
     }
 }

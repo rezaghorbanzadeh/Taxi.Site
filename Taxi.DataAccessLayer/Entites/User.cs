@@ -33,7 +33,11 @@ namespace Taxi.DataAccessLayer.Entites
         [Display(Name = "فعال/غیر فعال")] 
         public bool IsActive { get; set; }
 
+        [Display(Name = "کیف پول")]
+        public long Wallet { get; set; }
+
         [ForeignKey("RoleId")]
         public virtual Role Role { get; set; }
+        public virtual Driver Driver { get; set; }
     }
 }

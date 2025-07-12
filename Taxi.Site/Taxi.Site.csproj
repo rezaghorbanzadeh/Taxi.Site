@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Taxi.DataAccessLayer\Taxi.DataAccessLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\driver\" />
+  </ItemGroup>
+
 </Project>

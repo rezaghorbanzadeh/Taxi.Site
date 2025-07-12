@@ -14,6 +14,7 @@ namespace Taxi.Core.Interfaces
         bool CheckMobileNumber(string username);
 
         Task<User> RegisterUser(RegisterViewModel viewModel);
+        Task<User> RegisterDriver(RegisterViewModel viewModel);
 
         Guid GetRoleByName(string name);
 
