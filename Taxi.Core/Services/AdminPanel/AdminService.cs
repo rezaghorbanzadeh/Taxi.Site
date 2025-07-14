@@ -52,7 +52,8 @@ namespace Taxi.Core.Services.AdminPanel
         {
             Car car = _context.Cars.Find(id);
 
-            if (car != null) { 
+            if (car != null)
+            {
                 _context.Remove(car);
                 _context.SaveChanges();
                 return true;
@@ -70,13 +71,14 @@ namespace Taxi.Core.Services.AdminPanel
 
         public async Task<List<Car>> GetCars()
         {
-            return await _context.Cars.OrderBy(c=>c.Name).ToListAsync();
+            return await _context.Cars.OrderBy(c => c.Name).ToListAsync();
         }
 
         public bool UpdateCar(Guid id, CarViewModel viewModel)
         {
             Car car = _context.Cars.Find(id);
-            if (car != null) { 
+            if (car != null)
+            {
                 car.Name = viewModel.Name;
                 _context.SaveChanges();
                 return true;
@@ -87,6 +89,68 @@ namespace Taxi.Core.Services.AdminPanel
             }
         }
 
+
+        #endregion
+
+
+        #region Car Color
+        public async Task<List<CarColor>> GetColor()
+        {
+            return await _context.CarColors.OrderBy(c => c.Name).ToListAsync();
+        }
+
+        public async Task<CarColor> GetColorId(Guid id)
+        {
+            return await _context.CarColors.FindAsync(id);
+        }
+
+        public void AddColor(CarColorViewModel viewModel)
+        {
+            CarColor carColor = new CarColor()
+            {
+                Id = CodeGenerator.GetId(),
+                Name = viewModel.Name,
+                Code = viewModel.Code,
+            };
+            _context.CarColors.Add(carColor);
+            _context.SaveChanges();
+        }
+
+        public bool UpdateColor(Guid id, CarColorViewModel viewModel)
+        {
+            CarColor color = _context.CarColors.Find(id);
+
+            if (color != null)
+            {
+                color.Name = viewModel.Name;
+                color.Code = viewModel.Code;
+
+                _context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteColor(Guid id)
+        {
+            CarColor car = _context.CarColors.Find(id);
+
+
+            if (car != null)
+            {
+                _context.Remove(car);
+                _context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
         #endregion
     }
 }

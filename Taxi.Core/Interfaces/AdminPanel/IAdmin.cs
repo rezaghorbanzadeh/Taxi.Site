@@ -21,5 +21,18 @@ namespace Taxi.Core.Interfaces.Admin
         bool DeleteCar(Guid id);
 
         #endregion
+
+
+        #region Car Color
+        Task<List<CarColor>> GetColor();
+
+        Task<CarColor> GetColorId(Guid id);
+
+        void AddColor(CarColorViewModel viewModel);
+        bool UpdateColor(Guid id,CarColorViewModel viewModel);
+
+        bool DeleteColor(Guid id);
+
+        #endregion
     }
 }
