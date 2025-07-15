@@ -151,6 +151,64 @@ namespace Taxi.Core.Services.AdminPanel
             }
 
         }
+
+
+        #endregion
+
+
+        #region RateType
+
+        public async Task<List<RateType>> GetRateType()
+        {
+            return await  _context.RateTypes.OrderBy(r => r.Name).ToListAsync();
+        }
+
+        public async Task<RateType> GetRateTypeById(Guid id)
+        {
+            return await _context.RateTypes.FindAsync(id);
+        }
+
+        public void AddRateType(RateTypeViewModel viewModel)
+        {
+            RateType rateType = new RateType()
+            {
+                Id = CodeGenerator.GetId(),
+                Name = viewModel.Name,
+                Ok = viewModel.Ok,
+                ViewOrder = viewModel.ViewOrder,
+
+            };
+            _context.RateTypes.Add(rateType);
+            _context.SaveChanges();
+
+        }
+
+        public bool UpdateRateType(Guid id, RateTypeViewModel viewModel)
+        {
+            RateType rateType = _context.RateTypes.Find(id);
+            if (rateType != null) { 
+                
+                rateType.Name = viewModel.Name;
+                rateType.Ok = viewModel.Ok;
+                rateType.ViewOrder = viewModel.ViewOrder;
+            
+                _context.SaveChanges();
+
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteRateType(Guid id)
+        {
+            RateType rateType = _context.RateTypes.Find(id);
+            if (rateType != null) { 
+                _context.RateTypes.Remove(rateType);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
         #endregion
     }
 }

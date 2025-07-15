@@ -34,5 +34,18 @@ namespace Taxi.Core.Interfaces.Admin
         bool DeleteColor(Guid id);
 
         #endregion
+        
+        
+        #region RateType
+        Task<List<RateType>> GetRateType();
+
+        Task<RateType> GetRateTypeById(Guid id);
+
+        void AddRateType(RateTypeViewModel viewModel);
+        bool UpdateRateType(Guid id, RateTypeViewModel viewModel);
+
+        bool DeleteRateType(Guid id);
+
+        #endregion
     }
 }

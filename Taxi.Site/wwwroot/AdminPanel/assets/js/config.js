@@ -88,26 +88,26 @@ TemplateCustomizer.LANGUAGES.fr = { ... };
 
 if (typeof TemplateCustomizer !== 'undefined') {
     window.templateCustomizer = new TemplateCustomizer({
-        cssPath: assetsPath + '/AdminPanel/vendor/css' + (rtlSupport ? '/rtl' : '') + '/',
-        themesPath: assetsPath + '/AdminPanel/vendor/css' + (rtlSupport ? '/rtl' : '') + '/',
+        cssPath: assetsPath + 'vendor/css' + (rtlSupport ? '/rtl' : '') + '/',
+        themesPath: assetsPath + 'vendor/css' + (rtlSupport ? '/rtl' : '') + '/',
         displayCustomizer: true,
-         lang: 'fr',
-         defaultTheme: 2,
-         defaultStyle: 'light',
-         defaultTextDir: 'ltr',
-         defaultLayoutType: 'fixed',
-         defaultMenuCollapsed: true,
-         defaultNavbarFixed: true,
-         defaultFooterFixed: false
+        // lang: 'fr',
+        // defaultTheme: 2,
+        // defaultStyle: 'light',
+        // defaultTextDir: 'ltr',
+        // defaultLayoutType: 'fixed',
+        // defaultMenuCollapsed: true,
+        // defaultNavbarFixed: true,
+        // defaultFooterFixed: false
         defaultShowDropdownOnHover: true
-         controls: [
-           'rtl',
-           'style',
-           'layoutType',
-           'showDropdownOnHover',
-           'layoutNavbarFixed',
-           'layoutFooterFixed',
-           'themes'
-         ],
+        // controls: [
+        //   'rtl',
+        //   'style',
+        //   'layoutType',
+        //   'showDropdownOnHover',
+        //   'layoutNavbarFixed',
+        //   'layoutFooterFixed',
+        //   'themes'
+        // ],
     });
 }

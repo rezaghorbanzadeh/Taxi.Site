@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\AdminPanel\assets\NewFolder\" />
     <Folder Include="wwwroot\img\driver\" />
   </ItemGroup>
 

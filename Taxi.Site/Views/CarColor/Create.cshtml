@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Taxi.DataAccessLayer.Entites.Car>
+﻿@model IEnumerable<Taxi.DataAccessLayer.Entites.CarColor>
 
 @{
 	ViewData["Title"] = "‌اضافه کردن  ماشین ";
@@ -15,17 +15,21 @@
 						<small class="text-muted float-end">اضافه کردن </small>
 					</div>
 					<div class="card-body">
-						<form method="post" asp-action="Create" asp-controller="Car">
+						<form method="post" asp-action="Create" asp-asp-controller="CarColor">
 							<div class="mb-3">
 								<label class="form-label" for="basic-default-fullname">نام ماشین</label>
 								<input name="Name" type="text" class="form-control" id="basic-default-fullname" placeholder="مثال سمند " />
+							</div>			
+							<div class="mb-3">
+								<label class="form-label" for="basic-default-fullname">کد رنگ</label>
+								<input name="Code" type="color" class="form-control" id="basic-default-fullname"  />
 							</div>
 							<button type="submit" class="btn btn-primary">ثبت</button>
 						</form>
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>

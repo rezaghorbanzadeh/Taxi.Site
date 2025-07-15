@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Taxi.DataAccessLayer.Entites.Car>
+﻿@model IEnumerable<Taxi.DataAccessLayer.Entites.RateType>
 
 @{
-	ViewData["Title"] = "‌اضافه کردن  ماشین ";
+	ViewData["Title"] = "‌اضافه کردن  امتیاز ";
 	Layout = "~/Views/Shared/AdminPanel/_AdminPanelLayout.cshtml";
 }
 <div class="content-wrapper">
@@ -15,17 +15,25 @@
 						<small class="text-muted float-end">اضافه کردن </small>
 					</div>
 					<div class="card-body">
-						<form method="post" asp-action="Create" asp-controller="Car">
+						<form method="post" asp-action="Create" asp-controller="RateType">
 							<div class="mb-3">
-								<label class="form-label" for="basic-default-fullname">نام ماشین</label>
+								<label class="form-label" for="basic-default-fullname">نام امتیاز</label>
 								<input name="Name" type="text" class="form-control" id="basic-default-fullname" placeholder="مثال سمند " />
+							</div>			
+							<div class="mb-3">
+								<label class="form-label" > مثبت بودن</label>
+								<input name="Ok" type="checkbox" id="basic-default-fullname" value="true" />
+							</div>		
+							<div class="mb-3">
+								<label class="form-label" for="basic-default-fullname">نمایش امتیاز</label>
+								<input name="ViewOrder" type="number" class="form-control" id="basic-default-fullname" />
 							</div>
 							<button type="submit" class="btn btn-primary">ثبت</button>
 						</form>
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>

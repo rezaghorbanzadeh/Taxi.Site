@@ -1,0 +1,39 @@
+﻿@model Taxi.Core.ViewModels.AdminPanel.RateTypeViewModel
+
+@{
+	ViewData["Title"] = "‌اضافه کردن  امتیاز ";
+	Layout = "~/Views/Shared/AdminPanel/_AdminPanelLayout.cshtml";
+}
+<div class="content-wrapper">
+	<!-- Content -->
+
+	<div class="container-xxl flex-grow-1 container-p-y">
+		<div class="row">
+			<div class="col-xl">
+				<div class="card mb-4">
+					<div class="card-header d-flex justify-content-between align-items-center">
+						<small class="text-muted float-end">اضافه کردن </small>
+					</div>
+					<div class="card-body">
+						<form method="post" asp-action="Edite" asp-asp-controller="RateType">
+							<div class="mb-3">
+								<label class="form-label" for="basic-default-fullname">نام امتیاز</label>
+								<input name="Name" type="text" class="form-control" id="basic-default-fullname" placeholder="مثال زرد " value="@Model.Name"/>
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="basic-default-fullname">مثبت بودن</label>
+								<input name="Ok" type="checkbox" class="form-control" id="basic-default-fullname" value="@Model.Ok" />
+							</div>			
+							<div class="mb-3">
+								<label class="form-label" for="basic-default-fullname">ترتیب نمایش</label>
+								<input name="ViewOrder" type="number" class="form-control" id="basic-default-fullname" value="@Model.ViewOrder" />
+							</div>
+							<button type="submit" class="btn btn-primary">ثبت</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
