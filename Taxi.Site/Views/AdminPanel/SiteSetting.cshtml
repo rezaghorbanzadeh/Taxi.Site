@@ -1,0 +1,43 @@
+﻿@model Taxi.Core.ViewModels.AdminPanel.SiteSettingViewModel;
+@{
+    ViewData["Title"] = "‌فعال سازی کاربر";
+    Layout = "~/Views/Shared/AdminPanel/_AdminPanelLayout.cshtml";
+
+}
+
+
+@if (ViewBag.IsSuccess == true)
+{
+    <script>
+        alert("موفقیت امیز بود");
+    </script>
+}
+<div class="form-container">
+    <h2>فعال سازی  </h2>
+    <form method="post"  asp-action="SiteSetting">
+    
+        <div class="form-group">
+            <label for="Code">شماره تلفن</label>
+            <input type="text" name="Name" id="Code" placeholder="مثل :0909909090" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>  
+        <div class="form-group">
+            <label for="Desc">توضیحات</label>
+            <input type="text" name="Desc" id="Code" placeholder="" required />
+            <span asp-validation-for="Desc" class="text-danger"></span>
+        </div>    
+        <div class="form-group">
+            <label for="Tel">شماره تماس</label>
+            <input type="text" name="Tel" id="Code" placeholder="" required />
+            <span asp-validation-for="Tel" class="text-danger"></span>
+        </div>   
+        <div class="form-group">
+            <label for="Fax">شماره فکس </label>
+            <input type="text" name="Fax" id="Code" placeholder="" required />
+            <span asp-validation-for="Fax" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn">فعال</button>
+
+    </form>
+
+</div>

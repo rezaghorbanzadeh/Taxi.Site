@@ -1,0 +1,39 @@
+﻿@model Taxi.Core.ViewModels.AdminPanel.AboutSettingViewModel;
+@{
+	ViewData["Title"] = "‌فعال سازی کاربر";
+	Layout = "~/Views/Shared/AdminPanel/_AdminPanelLayout.cshtml";
+
+}
+
+
+@if (ViewBag.IsSuccess == true)
+{
+	<script>
+		alert("موفقیت امیز بود");
+	</script>
+}
+<!-- Content wrapper -->
+<div class="content-wrapper">
+	<!-- Content -->
+	<div class="container-xxl flex-grow-1 container-p-y">
+		<div class="row">
+			<div class="col-xl">
+				<div class="card mb-4">
+
+					<div class="card-body">
+						<form method="post" asp-action="TermSetting">
+							<div class="mb-3">
+								<label for="exampleFormControlTextarea1" class="form-label">شرایط و قوانین</label>
+								<textarea class="form-control" name="Terms" id="exampleFormControlTextarea1" rows="3">@Html.DisplayNameFor(Model => Model.About)</textarea>
+							</div>
+							<button type="submit" class="btn btn-primary">ثبت</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- / Content -->
+<!-- Content wrapper -->

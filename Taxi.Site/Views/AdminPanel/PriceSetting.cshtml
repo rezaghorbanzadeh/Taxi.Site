@@ -1,0 +1,34 @@
+﻿@model Taxi.Core.ViewModels.AdminPanel.PriceSettingViewModel;
+@{
+    ViewData["Title"] = "‌فعال سازی کاربر";
+    Layout = "~/Views/Shared/AdminPanel/_AdminPanelLayout.cshtml";
+
+}
+
+
+@if (ViewBag.IsSuccess == true)
+{
+    <script>
+        alert("موفقیت امیز بود");
+    </script>
+}
+<div class="form-container">
+    <h2>اضافه کردن قیمت بر اساس    </h2>
+    <form method="post" asp-action="PriceSetting">
+
+        <div class="form-group">
+            <label for="IsDistance"> مسافت</label>
+            <input type="checkbox" name="IsDistance" id="Code"/>
+            <span asp-validation-for="IsDistance" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="Desc">اب و هوا</label>
+            <input type="text" name="Desc" id="Code"  />
+            <span asp-validation-for="IsWeatherPrice" class="text-danger"></span>
+        </div>
+      
+        <button type="submit" class="btn">فعال</button>
+
+    </form>
+
+</div>

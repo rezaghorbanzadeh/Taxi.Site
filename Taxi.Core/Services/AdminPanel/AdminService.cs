@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,8 +34,6 @@ namespace Taxi.Core.Services.AdminPanel
                 _context.Dispose();
             }
         }
-
-
 
         #region Car
         public void AddCar(CarViewModel viewModel)
@@ -91,7 +90,6 @@ namespace Taxi.Core.Services.AdminPanel
 
 
         #endregion
-
 
         #region Car Color
         public async Task<List<CarColor>> GetColor()
@@ -155,7 +153,6 @@ namespace Taxi.Core.Services.AdminPanel
 
         #endregion
 
-
         #region RateType
 
         public async Task<List<RateType>> GetRateType()
@@ -209,6 +206,184 @@ namespace Taxi.Core.Services.AdminPanel
             }
             return false;
         }
+
         #endregion
+
+        #region SiteSetting
+        public async Task<Setting> GetSetting()
+        {
+            return await  _context.Settings.FirstOrDefaultAsync();
+        }
+
+        public bool UpdateSiteSetting(SiteSettingViewModel viewModel)
+        {
+            Setting setting = _context.Settings.FirstOrDefault();
+
+            if (setting != null) { 
+               setting.Name = viewModel.Name;
+               setting.Tel = viewModel.Tel; 
+               setting.Fax = viewModel.Fax;
+               setting.Desc = viewModel.Desc;
+
+                _context.SaveChanges();
+                return true;
+            }
+            return false ;
+        }
+
+        public bool UpdatePriceSetting(PriceSettingViewModel viewModel)
+        {
+            Setting setting = _context.Settings.FirstOrDefault();
+
+            if (setting != null)
+            {
+                setting.IsDistance = viewModel.IsDistance;
+                setting.IsWeatherPrice = viewModel.IsWeatherPrice;
+
+
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        
+        public bool UpdateAboutSetting(AboutSettingViewModel viewModel)
+        {
+            Setting setting = _context.Settings.FirstOrDefault();
+
+            if (setting != null)
+            {
+                setting.About = viewModel.About;
+      
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateTermSetting(TermSettingViewModel viewModel)
+        {
+            Setting setting = _context.Settings.FirstOrDefault();
+
+            if (setting != null)
+            {
+                setting.Terms = viewModel.Terms;
+
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+
+        #endregion
+
+        #region PriceType
+        public async Task<List<PriceType>> GetPriceType()
+        {
+            return await _context.PriceTypes.OrderBy(c => c.Name).ToListAsync();
+        }
+
+        public async Task<PriceType> GetPriceTypeById(Guid id)
+        {
+            return await _context.PriceTypes.FindAsync(id);
+        }
+
+        public void AddPriceType(PriceTypeViewModel viewModel)
+        {
+            PriceType priceType = new PriceType()
+            {
+                Id = CodeGenerator.GetId(),
+                Name = viewModel.Name,
+                End = viewModel.End,
+                Start = viewModel.Start,
+                Price  = viewModel.Price,
+            };
+            _context.Add(priceType);
+            _context.SaveChanges();
+        }
+
+        public bool UpdatePriceType(Guid id, PriceTypeViewModel viewModel)
+        {
+            PriceType priceType = _context.PriceTypes.Find(id);
+            if (priceType != null)
+            {
+                priceType.Name = viewModel.Name;
+                _context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void DeletePriceType(Guid id)
+        {
+            PriceType priceType = _context.PriceTypes.Find(id);
+
+            if (priceType != null)
+            {
+                _context.Remove(priceType);
+                _context.SaveChanges();
+                
+            }
+        }
+        #endregion
+
+        #region MonthType
+        public async Task<List<MonthType>> GetMonthType()
+        {
+            return await _context.MonthTypes.OrderBy(m => m.Name).ToListAsync();
+        }
+
+        public async Task<MonthType> GetMonthTypeById(Guid id)
+        {
+           return await _context.MonthTypes.FindAsync(id);
+        }
+
+        public void AddMonthType(MonthTypeViewModel viewModel)
+        {
+            MonthType monthType = new MonthType()
+            {
+                Name = viewModel.Name,
+                precent = viewModel.precent,
+                End =viewModel.End,
+                Start = viewModel.Start,
+
+                
+            };
+            _context.Add(monthType);
+            _context.SaveChanges();
+        }
+
+        public bool UpdateMonthType(Guid id, MonthTypeViewModel viewModel)
+        {
+            MonthType monthType = _context.MonthTypes.Find(id);
+            if (monthType != null) { 
+                monthType.Name = viewModel.Name;
+                monthType.Start = viewModel.Start;
+                monthType.End = viewModel.End;  
+                monthType.precent = viewModel.precent;  
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public void DeleteMonthType(Guid id)
+        {
+            MonthType mouthType = _context.MonthTypes.Find(id);
+
+            if (mouthType != null)
+            {
+                _context.Remove(mouthType);
+                _context.SaveChanges();
+
+            }
+        }
+        #endregion
+
+
     }
 }

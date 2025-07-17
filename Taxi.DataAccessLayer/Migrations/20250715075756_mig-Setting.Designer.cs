@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Taxi.DataAccessLayer.Context;
 
@@ -11,9 +12,11 @@ using Taxi.DataAccessLayer.Context;
 namespace Taxi.DataAccessLayer.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250715075756_mig-Setting")]
+    partial class migSetting
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,54 +104,6 @@ namespace Taxi.DataAccessLayer.Migrations
                     b.HasIndex("CorId");
 
                     b.ToTable("Drivers");
-                });
-
-            modelBuilder.Entity("Taxi.DataAccessLayer.Entites.MonthType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("End")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("Start")
-                        .HasColumnType("int");
-
-                    b.Property<float>("precent")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MonthTypes");
-                });
-
-            modelBuilder.Entity("Taxi.DataAccessLayer.Entites.PriceType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("End")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<long>("Price")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Start")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PriceTypes");
                 });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.RateType", b =>
