@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Taxi.Core.ViewModels.AdminPanel;
 using Taxi.DataAccessLayer.Entites;
 
+
+
 namespace Taxi.Core.Interfaces.Admin
 {
     public interface IAdmin
@@ -20,8 +22,9 @@ namespace Taxi.Core.Interfaces.Admin
 
         bool DeleteCar(Guid id);
 
-        #endregion
 
+
+        #endregion
 
         #region Car Color
         Task<List<CarColor>> GetColor();
@@ -34,7 +37,6 @@ namespace Taxi.Core.Interfaces.Admin
         bool DeleteColor(Guid id);
 
         #endregion
-        
         
         #region RateType
         Task<List<RateType>> GetRateType();
@@ -59,16 +61,13 @@ namespace Taxi.Core.Interfaces.Admin
 
         #endregion
 
-
-
         #region PriceType
-
         Task<List<PriceType>> GetPriceType();
         Task<PriceType> GetPriceTypeById(Guid id);
         void AddPriceType(PriceTypeViewModel viewModel);
         bool UpdatePriceType(Guid id, PriceTypeViewModel viewModel);
 
-        void DeletePriceType(Guid id);
+        bool DeletePriceType(Guid id);
         #endregion 
         
         #region MonthType
@@ -77,7 +76,40 @@ namespace Taxi.Core.Interfaces.Admin
         Task<MonthType> GetMonthTypeById(Guid id);
         void AddMonthType(MonthTypeViewModel viewModel);
         bool UpdateMonthType(Guid id, MonthTypeViewModel viewModel);
-        void DeleteMonthType(Guid id);
+
+        bool DeleteMonthType(Guid id);
+        #endregion
+
+        #region Humidity
+
+        Task<List<Humidity>> GetHumidity();
+        Task<Humidity> GetHumidityById(Guid id);
+        void AddHumidity(MonthTypeViewModel viewModel);
+        bool UpdateHumidity(Guid id, MonthTypeViewModel viewModel);
+
+        bool DeleteHumidity(Guid id);
+        #endregion
+
+        #region Temperature
+
+        Task<List<Temperature>> GetTemperature();
+        Task<Temperature> GetTemperatureById(Guid id);
+        void AddTemperature(MonthTypeViewModel viewModel);
+        bool UpdateTemperature(Guid id, MonthTypeViewModel viewModel);
+
+        bool DeleteTemperature(Guid id);
+        #endregion
+
+        #region Role
+
+        Task<List<Role>> GetRoles();
+
+        Task<Role> GetRoleId(Guid id);
+
+        void AddRole(RoleViewModel viewModel);
+        bool UpdateRole(Guid id, RoleViewModel viewModel);
+
+        bool DeleteRole(Guid id);
         #endregion
     }
 }

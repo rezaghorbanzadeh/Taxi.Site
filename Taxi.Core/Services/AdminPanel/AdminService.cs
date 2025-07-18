@@ -35,6 +35,7 @@ namespace Taxi.Core.Services.AdminPanel
             }
         }
 
+
         #region Car
         public void AddCar(CarViewModel viewModel)
         {
@@ -318,7 +319,7 @@ namespace Taxi.Core.Services.AdminPanel
             }
         }
 
-        public void DeletePriceType(Guid id)
+        public bool DeletePriceType(Guid id)
         {
             PriceType priceType = _context.PriceTypes.Find(id);
 
@@ -327,7 +328,9 @@ namespace Taxi.Core.Services.AdminPanel
                 _context.Remove(priceType);
                 _context.SaveChanges();
                 
+                return true;
             }
+            return false;
         }
         #endregion
 
@@ -347,7 +350,7 @@ namespace Taxi.Core.Services.AdminPanel
             MonthType monthType = new MonthType()
             {
                 Name = viewModel.Name,
-                precent = viewModel.precent,
+                Precent = viewModel.Precent,
                 End =viewModel.End,
                 Start = viewModel.Start,
 
@@ -364,14 +367,14 @@ namespace Taxi.Core.Services.AdminPanel
                 monthType.Name = viewModel.Name;
                 monthType.Start = viewModel.Start;
                 monthType.End = viewModel.End;  
-                monthType.precent = viewModel.precent;  
+                monthType.Precent = viewModel.Precent;  
                 _context.SaveChanges();
                 return true;
             }
             return false;
         }
 
-        public void DeleteMonthType(Guid id)
+        public bool DeleteMonthType(Guid id)
         {
             MonthType mouthType = _context.MonthTypes.Find(id);
 
@@ -379,11 +382,173 @@ namespace Taxi.Core.Services.AdminPanel
             {
                 _context.Remove(mouthType);
                 _context.SaveChanges();
-
+                return true;
             }
+            return false;
+        }
+
+
+        #endregion 
+
+        #region Humidity
+        public async Task<List<Humidity>> GetHumidity()
+        {
+            return await _context.Humidities.OrderBy(m => m.Name).ToListAsync();
+        }
+
+        public async Task<Humidity> GetHumidityById(Guid id)
+        {
+            return await _context.Humidities.FindAsync(id);
+        }
+
+        public void AddHumidity(MonthTypeViewModel viewModel)
+        {
+            Humidity humidity = new Humidity()
+            {
+                Name = viewModel.Name,
+                Precent = viewModel.Precent,
+                End = viewModel.End,
+                Start = viewModel.Start,
+
+
+            };
+            _context.Add(humidity);
+            _context.SaveChanges();
+        }
+
+        public bool UpdateHumidity(Guid id, MonthTypeViewModel viewModel)
+        {
+            Humidity humidity = _context.Humidities.Find(id);
+            if (humidity != null)
+            {
+                humidity.Name = viewModel.Name;
+                humidity.Start = viewModel.Start;
+                humidity.End = viewModel.End;
+                humidity.Precent = viewModel.Precent;
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteHumidity(Guid id)
+        {
+            Humidity humidity = _context.Humidities.Find(id);
+
+            if (humidity != null)
+            {
+                _context.Remove(humidity);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
         #endregion
 
+        #region Temperature
+        public async Task<List<Temperature>> GetTemperature()
+        {
+            return await _context.Temperatures.OrderBy(m => m.Name).ToListAsync();
+        }
 
+        public async Task<Temperature> GetTemperatureById(Guid id)
+        {
+            return await _context.Temperatures.FindAsync(id);
+        }
+
+        public void AddTemperature(MonthTypeViewModel viewModel)
+        {
+            Temperature temperature = new Temperature()
+            {
+                Name = viewModel.Name,
+                Precent = viewModel.Precent,
+                End = viewModel.End,
+                Start = viewModel.Start,
+
+
+            };
+            _context.Add(temperature);
+            _context.SaveChanges();
+        }
+
+        public bool UpdateTemperature(Guid id, MonthTypeViewModel viewModel)
+        {
+            Temperature temperature = _context.Temperatures.Find(id);
+            if (temperature != null)
+            {
+                temperature.Name = viewModel.Name;
+                temperature.Start = viewModel.Start;
+                temperature.End = viewModel.End;
+                temperature.Precent = viewModel.Precent;
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteTemperature(Guid id)
+        {
+            Temperature temperature = _context.Temperatures.Find(id);
+
+            if (temperature != null)
+            {
+                _context.Remove(temperature);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+
+        #endregion
+
+
+
+        #region Role
+        public async Task<List<Role>> GetRoles()
+        {
+            return await _context.Roles.OrderBy(r => r.Name).ToListAsync();
+        }
+
+        public async Task<Role> GetRoleId(Guid id)
+        {
+           return await _context.Roles.FindAsync(id);
+        }
+
+        public void AddRole(RoleViewModel viewModel)
+        {
+            Role role = new Role()
+            {
+                Name = viewModel.Name,
+                Title = viewModel.Title,
+            };
+            _context.Roles.Add(role);
+            _context.SaveChanges(true);
+        }
+
+        public bool UpdateRole(Guid id, RoleViewModel viewModel)
+        {
+            Role role = _context.Roles.Find(id);
+
+            if (role != null) { 
+                role.Name = viewModel.Name;
+                role.Title = viewModel.Title;
+                _context.SaveChanges(true);
+                return true;
+            }
+            return false ;
+        }
+
+        public bool DeleteRole(Guid id)
+        {
+            Role role = _context.Roles.Find(id);
+            if (role != null) { 
+                _context.Roles.Remove(role);
+                _context.SaveChanges(true);
+                return true;
+            }
+            return false ;
+        }
+        #endregion
     }
 }

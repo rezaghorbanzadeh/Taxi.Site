@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Taxi.DataAccessLayer.Entites.PriceType>
+
+@{
+    ViewData["Title"] = "‌لیست امتیاز ها";
+    Layout = "~/Views/Shared/AdminPanel/_AdminPanelLayout.cshtml";
+}
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-2"><span class="text-muted fw-light">لیست /</span>  قیمت بر اساس مسافت</h4><br />
+        <a asp-controller="PriceType" asp-action="Create" class="btn btn-light mb-2 btn-sm ">اضافه کردن قیمت بر اساس مسافت</a>
+
+        <!-- Invoice List Table -->
+        <div class="card" dir="rtl">
+            <div class="card-datatable table-responsive">
+                <table class="table border-top">
+                    <thead>
+                        <tr>
+                            <th scope="col">@Html.DisplayNameFor(Model => Model.Name)</th>
+                            <th scope="col">@Html.DisplayNameFor(Model => Model.Start)</th>
+                            <th scope="col">@Html.DisplayNameFor(Model => Model.End)</th>
+                            <th scope="col">@Html.DisplayNameFor(Model => Model.Price)</th>
+
+                            <th scope="col" class="text-center mr-3">عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(Model => item.Name)</td>
+                                <td>@Html.DisplayFor(Model => item.Start)</td>
+                                <td>@Html.DisplayFor(Model => item.End)</td>
+                                <td>@Html.DisplayFor(Model => item.Price)</td>
+
+                                <td class="text-center">
+                                    <a href="/PriceType/Delete/@item.Id" class="btn btn-danger ms-1">حذف</a>
+                                    <a href="/PriceType/Edite/@item.Id" class="btn btn-warning">ویرایش</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- / Content -->
+
+
+
+    <div class="content-backdrop fade"></div>
+</div>

@@ -18,5 +18,6 @@
 	<ItemGroup>
 		
 		<ProjectReference Include="..\Taxi.DataAccessLayer\Taxi.DataAccessLayer.csproj" />
+		
 	</ItemGroup>
 </Project>

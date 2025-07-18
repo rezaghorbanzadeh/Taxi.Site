@@ -71,5 +71,38 @@ namespace Taxi.Site.Controllers.AdminPanel
             }
             return View(viewModel);
         }
+
+        public IActionResult ImportFile()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ImportFile(IFormFile file)
+        {
+            using (var stream = new MemoryStream())
+            {
+                await file.CopyToAsync(stream);
+                using (var workbook = new ClosedXML.Excel.XLWorkbook(stream))
+                {
+                    var worksheet = workbook.Worksheet(1);
+                    var rowCount = worksheet.LastRowUsed().RowNumber();
+
+                    for (int i = 2; i <= rowCount; i++)
+                    {
+                        var name = worksheet.Cell(i, 1).GetString().Trim();
+
+                        CarViewModel viewModel = new CarViewModel()
+                        {
+                            Name = name
+                        };
+
+                        _admin.AddCar(viewModel);
+                    }
+                }
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

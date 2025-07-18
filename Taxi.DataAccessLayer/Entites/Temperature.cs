@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Taxi.DataAccessLayer.Entites
 {
-    public class MonthType
+    public class Temperature
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -20,10 +20,10 @@ namespace Taxi.DataAccessLayer.Entites
         public string Name { get; set; }
         
 
-        [Display(Name = " از ماه")]
+        [Display(Name = " از دما")]
         public int Start { get; set; }
         
-        [Display(Name = " تا ماه")]
+        [Display(Name = " تا دما")]
         public int End { get; set; }   
         
         

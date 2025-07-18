@@ -16,14 +16,14 @@ namespace Taxi.Core.ViewModels.AdminPanel
         public string Name { get; set; }
 
 
-        [Display(Name = " از ماه")]
+        [Display(Name = " از ")]
         public int Start { get; set; }
 
-        [Display(Name = " تا ماه")]
+        [Display(Name = " تا ")]
         public int End { get; set; }
 
 
         [Display(Name = "  نرخ ثابت")]
-        public long precent { get; set; }
+        public long Precent { get; set; }
     }
 }

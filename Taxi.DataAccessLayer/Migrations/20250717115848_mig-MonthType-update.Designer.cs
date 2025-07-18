@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Taxi.DataAccessLayer.Context;
 
@@ -11,9 +12,11 @@ using Taxi.DataAccessLayer.Context;
 namespace Taxi.DataAccessLayer.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250717115848_mig-MonthType-update")]
+    partial class migMonthTypeupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,30 +104,6 @@ namespace Taxi.DataAccessLayer.Migrations
                     b.HasIndex("CorId");
 
                     b.ToTable("Drivers");
-                });
-
-            modelBuilder.Entity("Taxi.DataAccessLayer.Entites.Humidity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("End")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<float>("Precent")
-                        .HasColumnType("real");
-
-                    b.Property<int>("Start")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Humidities");
                 });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.MonthType", b =>
@@ -250,30 +229,6 @@ namespace Taxi.DataAccessLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Settings");
-                });
-
-            modelBuilder.Entity("Taxi.DataAccessLayer.Entites.Temperature", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("End")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<float>("Precent")
-                        .HasColumnType("real");
-
-                    b.Property<int>("Start")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Temperatures");
                 });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.User", b =>

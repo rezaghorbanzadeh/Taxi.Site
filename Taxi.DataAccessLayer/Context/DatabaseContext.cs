@@ -19,6 +19,8 @@ namespace Taxi.DataAccessLayer.Context
         public DbSet<Driver> Drivers{ get; set; }
         public DbSet<PriceType> PriceTypes{ get; set; }
         public DbSet<MonthType> MonthTypes { get; set; }
+        public DbSet<Humidity> Humidities { get; set; }
+        public DbSet<Temperature> Temperatures { get; set; }
         public DbSet<Car>Cars{ get; set; }
         public DbSet<CarColor> CarColors { get; set; }
         public DbSet<RateType> RateTypes { get; set; }

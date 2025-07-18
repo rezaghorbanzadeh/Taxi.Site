@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Taxi.DataAccessLayer.Entites.Car>
+
+@{
+	ViewData["Title"] = "‌اضافه کردن  ماشین ";
+	Layout = "~/Views/Shared/AdminPanel/_AdminPanelLayout.cshtml";
+}
+<div class="content-wrapper">
+	<!-- Content -->
+
+	<div class="container-xxl flex-grow-1 container-p-y">
+		<div class="row">
+			<div class="col-xl">
+				<div class="card mb-4">
+					<div class="card-header d-flex justify-content-between align-items-center">
+						
+						<a href="~/file/car.xlsx" target="_blank" class="btn btn-success text-muted float-end">دانلود نمونه فایل اکسلی</a>
+					</div>
+					<div class="card-body">
+						<form method="post" asp-action="ImportFile" asp-controller="Car" enctype="multipart/form-data">
+							<div class="mb-3">
+								<label class="form-label" for="basic-default-fullname">انتخاب فایل </label>
+								<input name="file" type="file" class="form-control"  />
+							</div>
+							<button type="submit" class="btn btn-primary">ثبت</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
