@@ -502,8 +502,6 @@ namespace Taxi.Core.Services.AdminPanel
 
         #endregion
 
-
-
         #region Role
         public async Task<List<Role>> GetRoles()
         {
@@ -519,6 +517,7 @@ namespace Taxi.Core.Services.AdminPanel
         {
             Role role = new Role()
             {
+                Id = CodeGenerator.GetId(),
                 Name = viewModel.Name,
                 Title = viewModel.Title,
             };
@@ -548,6 +547,206 @@ namespace Taxi.Core.Services.AdminPanel
                 return true;
             }
             return false ;
+        }
+
+
+        #endregion
+
+
+        #region User    
+        public bool CheckUser(string username)
+        {
+            return _context.Users.Any(u => u.UserName == username);
+        }
+
+        public void AddUser(UserViewModel viewModel)
+        {
+            User user = new User()
+            {
+                Id = CodeGenerator.GetId(),
+                IsActive = viewModel.IsActive,
+                Password = HashEncode.GetHashCode(CodeGenerator.GetActiveCode()),
+                Token = null,
+                UserName = viewModel.UserName,
+                Wallet = 0,
+                RoleId = viewModel.RoleId
+
+            };
+            _context.Users.Add(user);
+            UserDetail userDetail = new UserDetail()
+            {
+                Id = user.Id,
+                BirthDate = null,
+                Date = DataTimeGenerator.GetShamsiDate(),
+                Time = DataTimeGenerator.GetShamsiTime(),
+                FullName = null,
+            };
+
+            _context.UserDetails.Add(userDetail);
+            GetRoleName(viewModel.RoleId);
+
+            if (GetRoleName(viewModel.RoleId) == "driver")
+            {
+                Driver driver = new Driver()
+                {
+                    UserId = user.Id,
+                    CaraId = null,
+                    IsConfirm = false,
+                    Address = null,
+                    CarCode = null,
+                    CarColorId = null,
+                    CarImg = null,
+                    Tel = null,
+                    NationalCode = null,
+                    Avatar = null,
+                };
+                _context.Drivers.Add(driver);
+                _context.SaveChanges();
+            }
+            
+        }
+
+        public string GetRoleName(Guid id)
+        {
+            return _context.Roles.Find(id).Name;
+        }
+
+        public async Task<List<User>> GetUsers()
+        {
+            return await _context.Users.Include(u => u.Role).OrderBy(u => u.UserName).ToListAsync();
+        }
+
+        public  void DeleteUser(Guid id)
+        {
+            User user = _context.Users.Find(id);
+            if (user != null) { 
+                _context.Users.Remove(user);
+                _context.SaveChanges();
+            }
+        }
+
+        public void AddDriver(Guid id)
+        {
+            Driver driver = new Driver()
+            {
+                IsConfirm = false,
+                Address = null,
+                CarCode = null,
+                CaraId = null,
+                CarColorId = null,
+                CarImg = null,
+                Tel = null,
+                NationalCode = null,
+                Avatar = null,
+                UserId = id
+            };
+            _context.SaveChanges();
+        }
+
+        public void DeleteDriver(Guid id)
+        {
+            Driver driver = _context.Drivers.Find(id);
+            if (driver != null) { 
+                _context.Drivers.Remove(driver);
+                _context.SaveChanges();
+            }
+        }
+
+        public bool UpdateUser(UserViewModel viewModel, Guid id)
+        {
+            User user = _context.Users.Find(id);
+
+            if (user != null)
+            {
+                user.RoleId = viewModel.RoleId;
+                user.UserName = viewModel.UserName;
+                user.IsActive = viewModel.IsActive;
+
+                if (GetRoleName(viewModel.RoleId) == "driver") {
+                    if (!_context.Drivers.Any(d => d.UserId == id))
+                    {
+                        AddDriver(id);
+                    }
+                }
+                else
+                {
+                    if (_context.Drivers.Any(d => d.UserId == id))
+                    {
+                        DeleteDriver(id);
+                    }
+                }
+                _context.SaveChanges();
+
+                return true;
+            }
+            return false;
+        }
+
+        public bool CheckUserForUpdate(string username, Guid id)
+        {
+            return _context.Users.Any(u =>u.UserName== username && u.Id != id);
+        }
+
+        public async Task<User> GetUserById(Guid id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
+
+        public bool UpdateDriverProp(Guid id, DriverPropViewModel viewModel)
+        {
+
+            Driver driver = _context.Drivers.Find(id);
+
+           
+            if (viewModel.Avatar != null)
+            {
+                string strExt = Path.GetExtension(viewModel.Avatar.FileName).ToLower();
+                if (strExt != ".jpg")
+                {
+                    return false;
+                }
+                string filePath = "";
+
+                viewModel.AvatarName = CodeGenerator.GetFileName() + strExt;
+                filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/driver", viewModel.AvatarName);
+
+                using (var Stream = new FileStream(filePath, FileMode.Create))
+                {
+                    viewModel.Avatar.CopyTo(Stream);
+                }
+
+                if (driver.Avatar !=null)
+                {
+                    File.Delete("wwwroot/img/driver" + driver.Avatar);
+                }
+
+                driver.Avatar = viewModel.AvatarName;
+                driver.NationalCode= viewModel.NatinalCode;
+                driver.Address = viewModel.Address;
+                driver.Tel = viewModel.Tel;
+                _context.SaveChanges();
+                return true;
+            }
+            else
+            {
+
+                if (driver.Avatar != null)
+                {
+                    
+                    driver.NationalCode = viewModel.NatinalCode;
+                    driver.Address = viewModel.Address;
+                    driver.Tel = viewModel.Tel;
+                    _context.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+           
+        }
+
+        public async Task<Driver> GetDriver(Guid id)
+        {
+            return await _context.Drivers.FindAsync(id);
         }
         #endregion
     }

@@ -5,14 +5,16 @@ using Taxi.Core.ViewModels.AdminPanel;
 
 namespace Taxi.Site.Controllers.AdminPanel
 {
+    [Route("AdminPanel/[controller]/[action]")]
     public class CarColorController : Controller
     {
         private IAdmin _admin;
-
+        
         public CarColorController(IAdmin admin)
         {
             _admin = admin;
         }
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var result = await _admin.GetColor();

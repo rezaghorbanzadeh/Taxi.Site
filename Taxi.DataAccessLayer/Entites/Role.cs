@@ -15,6 +15,7 @@ namespace Taxi.DataAccessLayer.Entites
         public Guid Id { get; set; }
 
 
+
         [Display(Name = "نقش سیستمی")]
         [Required]
         [MaxLength(30)]

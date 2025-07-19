@@ -23,382 +23,382 @@ namespace Taxi.DataAccessLayer.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.Car", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Cars");
-                });
+                b.ToTable("Cars");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.CarColor", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Code")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                b.Property<string>("Code")
+                    .HasMaxLength(10)
+                    .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .HasColumnType("nvarchar(20)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("CarColors");
-                });
+                b.ToTable("CarColors");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.Driver", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("UserId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Address")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Avatar")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Avatar")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CarCode")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                b.Property<string>("CarCode")
+                    .HasMaxLength(30)
+                    .HasColumnType("nvarchar(30)");
 
-                    b.Property<Guid?>("CarColorId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid?>("CarColorId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CarImg")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("CarImg")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("CaraId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid?>("CaraId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CorId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid?>("CorId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("IsConfirm")
-                        .HasColumnType("bit");
+                b.Property<bool>("IsConfirm")
+                    .HasColumnType("bit");
 
-                    b.Property<string>("NationalCode")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                b.Property<string>("NationalCode")
+                    .HasMaxLength(10)
+                    .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("Tel")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                b.Property<string>("Tel")
+                    .HasMaxLength(30)
+                    .HasColumnType("nvarchar(30)");
 
-                    b.HasKey("UserId");
+                b.HasKey("UserId");
 
-                    b.HasIndex("CarColorId");
+                b.HasIndex("CarColorId");
 
-                    b.HasIndex("CorId");
+                b.HasIndex("CorId");
 
-                    b.ToTable("Drivers");
-                });
+                b.ToTable("Drivers");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.Humidity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("End")
-                        .HasColumnType("int");
+                b.Property<int>("End")
+                    .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<float>("Precent")
-                        .HasColumnType("real");
+                b.Property<float>("Precent")
+                    .HasColumnType("real");
 
-                    b.Property<int>("Start")
-                        .HasColumnType("int");
+                b.Property<int>("Start")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Humidities");
-                });
+                b.ToTable("Humidities");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.MonthType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("End")
-                        .HasColumnType("int");
+                b.Property<int>("End")
+                    .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<float>("Precent")
-                        .HasColumnType("real");
+                b.Property<float>("Precent")
+                    .HasColumnType("real");
 
-                    b.Property<int>("Start")
-                        .HasColumnType("int");
+                b.Property<int>("Start")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("MonthTypes");
-                });
+                b.ToTable("MonthTypes");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.PriceType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("End")
-                        .HasColumnType("int");
+                b.Property<int>("End")
+                    .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<long>("Price")
-                        .HasColumnType("bigint");
+                b.Property<long>("Price")
+                    .HasColumnType("bigint");
 
-                    b.Property<int>("Start")
-                        .HasColumnType("int");
+                b.Property<int>("Start")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("PriceTypes");
-                });
+                b.ToTable("PriceTypes");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.RateType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                b.Property<string>("Name")
+                    .HasMaxLength(40)
+                    .HasColumnType("nvarchar(40)");
 
-                    b.Property<bool>("Ok")
-                        .HasColumnType("bit");
+                b.Property<bool>("Ok")
+                    .HasColumnType("bit");
 
-                    b.Property<int>("ViewOrder")
-                        .HasColumnType("int");
+                b.Property<int>("ViewOrder")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("RateTypes");
-                });
+                b.ToTable("RateTypes");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.Role", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                b.Property<string>("Title")
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .HasColumnType("nvarchar(30)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Roles");
-                });
+                b.ToTable("Roles");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.Setting", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("About")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("About")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Desc")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Desc")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Fax")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                b.Property<string>("Fax")
+                    .HasMaxLength(40)
+                    .HasColumnType("nvarchar(40)");
 
-                    b.Property<bool>("IsDistance")
-                        .HasColumnType("bit");
+                b.Property<bool>("IsDistance")
+                    .HasColumnType("bit");
 
-                    b.Property<bool>("IsWeatherPrice")
-                        .HasColumnType("bit");
+                b.Property<bool>("IsWeatherPrice")
+                    .HasColumnType("bit");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Name")
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Tel")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                b.Property<string>("Tel")
+                    .HasMaxLength(40)
+                    .HasColumnType("nvarchar(40)");
 
-                    b.Property<string>("Terms")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Terms")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Settings");
-                });
+                b.ToTable("Settings");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.Temperature", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("End")
-                        .HasColumnType("int");
+                b.Property<int>("End")
+                    .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<float>("Precent")
-                        .HasColumnType("real");
+                b.Property<float>("Precent")
+                    .HasColumnType("real");
 
-                    b.Property<int>("Start")
-                        .HasColumnType("int");
+                b.Property<int>("Start")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Temperatures");
-                });
+                b.ToTable("Temperatures");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                b.Property<bool>("IsActive")
+                    .HasColumnType("bit");
 
-                    b.Property<string>("Password")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Password")
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("RoleId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Token")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Token")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
+                b.Property<string>("UserName")
+                    .IsRequired()
+                    .HasMaxLength(11)
+                    .HasColumnType("nvarchar(11)");
 
-                    b.Property<long>("Wallet")
-                        .HasColumnType("bigint");
+                b.Property<long>("Wallet")
+                    .HasColumnType("bigint");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+                b.HasIndex("RoleId");
 
-                    b.ToTable("Users");
-                });
+                b.ToTable("Users");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.UserDetail", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("BirthDate")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                b.Property<string>("BirthDate")
+                    .HasMaxLength(10)
+                    .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("Date")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                b.Property<string>("Date")
+                    .HasMaxLength(10)
+                    .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("FullName")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("FullName")
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Time")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                b.Property<string>("Time")
+                    .HasMaxLength(10)
+                    .HasColumnType("nvarchar(10)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("UserDetails");
-                });
+                b.ToTable("UserDetails");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.Driver", b =>
-                {
-                    b.HasOne("Taxi.DataAccessLayer.Entites.CarColor", "CarColor")
-                        .WithMany("Drivers")
-                        .HasForeignKey("CarColorId");
+            {
+                b.HasOne("Taxi.DataAccessLayer.Entites.CarColor", "CarColor")
+                    .WithMany("Drivers")
+                    .HasForeignKey("CarColorId");
 
-                    b.HasOne("Taxi.DataAccessLayer.Entites.Car", "Car")
-                        .WithMany("Drivers")
-                        .HasForeignKey("CorId");
+                b.HasOne("Taxi.DataAccessLayer.Entites.Car", "Car")
+                    .WithMany("Drivers")
+                    .HasForeignKey("CorId");
 
-                    b.HasOne("Taxi.DataAccessLayer.Entites.User", "User")
-                        .WithOne("Driver")
-                        .HasForeignKey("Taxi.DataAccessLayer.Entites.Driver", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("Taxi.DataAccessLayer.Entites.User", "User")
+                    .WithOne("Driver")
+                    .HasForeignKey("Taxi.DataAccessLayer.Entites.Driver", "UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("Car");
+                b.Navigation("Car");
 
-                    b.Navigation("CarColor");
+                b.Navigation("CarColor");
 
-                    b.Navigation("User");
-                });
+                b.Navigation("User");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.User", b =>
-                {
-                    b.HasOne("Taxi.DataAccessLayer.Entites.Role", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("Taxi.DataAccessLayer.Entites.Role", "Role")
+                    .WithMany("Users")
+                    .HasForeignKey("RoleId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("Role");
-                });
+                b.Navigation("Role");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.UserDetail", b =>
-                {
-                    b.HasOne("Taxi.DataAccessLayer.Entites.User", "User")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("Taxi.DataAccessLayer.Entites.User", "User")
+                    .WithMany()
+                    .HasForeignKey("Id")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("User");
-                });
+                b.Navigation("User");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.Car", b =>
-                {
-                    b.Navigation("Drivers");
-                });
+            {
+                b.Navigation("Drivers");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.CarColor", b =>
-                {
-                    b.Navigation("Drivers");
-                });
+            {
+                b.Navigation("Drivers");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.Role", b =>
-                {
-                    b.Navigation("Users");
-                });
+            {
+                b.Navigation("Users");
+            });
 
             modelBuilder.Entity("Taxi.DataAccessLayer.Entites.User", b =>
-                {
-                    b.Navigation("Driver");
-                });
+            {
+                b.Navigation("Driver");
+            });
 #pragma warning restore 612, 618
         }
     }
