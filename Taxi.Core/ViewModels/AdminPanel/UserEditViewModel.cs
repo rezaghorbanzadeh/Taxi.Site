@@ -8,7 +8,7 @@ using Taxi.DataAccessLayer.Entites;
 
 namespace Taxi.Core.ViewModels.AdminPanel
 {
-    public class UserViewModel
+    public class UserEditViewModel
     {
         [Display(Name = "انتخاب نقش")]
         public Guid RoleId { get; set; }
@@ -18,6 +18,14 @@ namespace Taxi.Core.ViewModels.AdminPanel
         [MinLength(11)]
         public string UserName { get; set; }
 
+        [Display(Name = "نام و نام خانوادگی")]
+        [MaxLength(100)]
+        [Required]
+        public string FullName { get; set; }
+
+        [Display(Name = "تاریخ تولد")]
+        [MaxLength(10)]
+        public string BirthDate { get; set; }
         [Display(Name = "فعال/غیر فعال")]
 
         public bool IsActive { get; set; }

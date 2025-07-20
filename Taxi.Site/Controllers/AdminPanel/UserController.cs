@@ -43,19 +43,22 @@ namespace Taxi.Site.Controllers.AdminPanel
         public async Task <IActionResult> Edite(Guid id)
         {
             User user = await _admin.GetUserById(id);
+            UserDetail detail = await _admin.GetUserDetail(id);
 
-            UserViewModel viewModel = new UserViewModel()
+            UserEditViewModel viewModel = new UserEditViewModel()
             {
                 RoleId = user.Id,
                 IsActive = user.IsActive,
                 UserName = user.UserName,
+                BirthDate = detail.BirthDate,
+                FullName = detail.FullName, 
             };
             ViewBag.RoleId = new SelectList(await _admin.GetRoles(), "Id", "Title",user.RoleId);
             return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edite(UserViewModel viewModel,Guid id)
+        public async Task<IActionResult> Edite(UserEditViewModel viewModel,Guid id)
         {
             if (ModelState.IsValid)
             {
@@ -79,36 +82,19 @@ namespace Taxi.Site.Controllers.AdminPanel
                 NatinalCode = result.NationalCode,
                 Tel = result.Tel,
             };
-            ViewBag.IsError = false;
-            ViewBag.IsSuccess = false;
+
 
             return View(viewModel);
         } 
         [HttpPost]
         public async Task<IActionResult> DriverProp(Guid id, DriverPropViewModel viewModel)
         {
-
-            bool status = false;
-
             if (ModelState.IsValid)
             {
-                status = _admin.UpdateDriverProp(id, viewModel);
-            }
-            if (status)
-            {
-                ViewBag.IsError = false;
-                ViewBag.IsSuccess = true;
-
-            }
-            else
-            {
-                ViewBag.IsError = true;
-                ViewBag.IsSuccess = false;
+               _admin.UpdateDriverProp(id, viewModel);
             }
 
-
-
-                var result = await _admin.GetDriver(id);
+            var result = await _admin.GetDriver(id);
 
             DriverPropViewModel model = new DriverPropViewModel()
             {
@@ -125,6 +111,104 @@ namespace Taxi.Site.Controllers.AdminPanel
             return View(model);
         }
 
+        public async Task<IActionResult> DriverCertificate(Guid id)
+        {
+            var driver = await _admin.GetDriver(id);
+
+            DriverImgViewModel viewModel = new DriverImgViewModel()
+            {
+                ImgName = driver.CarImg,
+                IsConfirm = driver.IsConfirm,
+            };
+
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DriverCertificate(Guid id, DriverImgViewModel viewModel)
+        {
+            var driver = await _admin.GetDriver(id);
+
+            if (ModelState.IsValid) { 
+            _admin.UpdateDriverCertificate(id, viewModel);
+            
+            }
+            DriverImgViewModel model = new DriverImgViewModel()
+            {
+                ImgName = driver.CarImg,
+                IsConfirm = driver.IsConfirm,
+            };
+            ViewBag.IsError = false;
+            ViewBag.IsSuccess = false;
+            if (ModelState.IsValid)
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(model);
+        }
+
+
+        public async Task<IActionResult> DriverCar(Guid id)
+        {
+            var driver  = await _admin.GetDriver(id);
+
+            DriverCarViewModel viewModel = new DriverCarViewModel()
+            {
+                CarCode = driver.CarCode,
+                CarId = driver.CaraId,
+                CarColorId = driver.CarColorId,
+            };
+            if (driver.CaraId == null)
+            {
+                ViewBag.CarId = new SelectList(await _admin.GetCars(), "Id", "Name");
+
+            }
+            else
+            {
+                ViewBag.CarId = new SelectList(await _admin.GetCars(), "Id", "Name",viewModel.CarId);
+            }    
+            if (driver.CarColorId == null)
+            {
+                ViewBag.CarColorId = new SelectList(await _admin.GetColor(), "Id", "Name");
+
+            }
+            else
+            {
+                ViewBag.CarColorId = new SelectList(await _admin.GetColor(), "Id", "Name", viewModel.CarColorId);
+            }
+               
+            
+            ViewBag.IsSuccess = false ;
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DriverCar(Guid id ,DriverCarViewModel viewModel)
+        {
+
+            if (ModelState.IsValid) { 
+             _admin.UpdateDriverCar(id, viewModel);
+            
+            }
+
+            ViewBag.CarId = new SelectList(await _admin.GetCars(),"Id","Name",viewModel.CarId);
+            ViewBag.CarColorId = new SelectList(await _admin.GetColor(),"Id","Name",viewModel.CarColorId);
+            
+            ViewBag.IsSuccess = false ;
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Index));
+
+            }
+
+            return View(viewModel);
+        }
     }
-     
-}
+
+
+
+      
+
+    }

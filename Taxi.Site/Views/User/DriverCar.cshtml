@@ -1,0 +1,43 @@
+﻿@model Taxi.Core.ViewModels.AdminPanel.DriverCarViewModel
+
+@{
+	ViewData["Title"] = "‌ویرایش اطلاعات";
+	Layout = "~/Views/Shared/AdminPanel/_AdminPanelLayout.cshtml";
+}
+<div class="content-wrapper">
+	<!-- Content -->
+
+	<div class="container-xxl flex-grow-1 container-p-y">
+		<div class="row">
+			<div class="col-xl">
+				<div class="card mb-4">
+					<div class="card-header d-flex justify-content-between align-items-center">
+						<small class="text-muted float-end">اضافه کردن </small>
+					</div>
+					<div class="card-body">
+						<form method="post" asp-action="DriverCar" asp-controller="User">
+							<div class="mb-3">
+								<label asp-for="CarId" class="form-label">   </label>
+								<select asp-for="CarId" asp-items="ViewBag.CarId" class="form-control">
+								</select>
+							</div>
+							<div class="mb-3">
+								<label asp-for="CarColorId" class="form-label">   </label>
+								<select asp-for="CarColorId" asp-items="ViewBag.CarColorId" class="form-control">
+								</select>
+							</div>
+							<div class="mb-3">
+								<label class="form-label" asp-for="CarCode">     </label>
+								<input name="CarCode" type="text" class="form-control" value="@Model.CarCode " />
+							</div>
+							
+							<button type="submit" class="btn btn-primary">ثبت</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+

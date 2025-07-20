@@ -122,12 +122,15 @@ namespace Taxi.Core.Interfaces.Admin
         void DeleteUser(Guid id);
         void AddDriver(Guid id);
         void DeleteDriver(Guid id);
-        bool UpdateUser(UserViewModel viewModel, Guid id);
+        bool UpdateUser(UserEditViewModel viewModel, Guid id);
         bool CheckUserForUpdate(string username,Guid id);
         Task<User> GetUserById(Guid id);
+        Task<UserDetail> GetUserDetail(Guid id);
         Task<Driver> GetDriver(Guid id);
 
         bool UpdateDriverProp(Guid id,DriverPropViewModel viewModel);
+        bool UpdateDriverCertificate(Guid id,DriverImgViewModel viewModel);
+        bool UpdateDriverCar(Guid id,DriverCarViewModel viewModel);
         #endregion
     }
 }

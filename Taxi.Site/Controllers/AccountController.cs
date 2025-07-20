@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Taxi.Core.Interfaces;
 using Taxi.Core.ViewModels;
 using Taxi.DataAccessLayer.Entites;
@@ -74,8 +77,25 @@ namespace Taxi.Site.Controllers
                
             User user = await _accounting.ActiveCode(viewModel);
                 if (user != null) { 
-                ViewBag.IsError = false ;
-                    // 
+                    ViewBag.IsError = false ;
+
+                    var claims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.NameIdentifier , user.Id.ToString()),
+                        new Claim(ClaimTypes.Name , user.UserName),
+                    };
+
+                    var identity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
+                    
+                    var principal = new ClaimsPrincipal(identity);
+
+                    var propertis = new AuthenticationProperties()
+                    {
+                        IsPersistent = true,
+                    };
+
+                    await HttpContext.SignInAsync(principal, propertis);
+                    //
                 }
             }
             return View(viewModel);

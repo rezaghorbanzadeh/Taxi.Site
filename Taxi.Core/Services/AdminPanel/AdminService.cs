@@ -652,15 +652,18 @@ namespace Taxi.Core.Services.AdminPanel
             }
         }
 
-        public bool UpdateUser(UserViewModel viewModel, Guid id)
+        public bool UpdateUser(UserEditViewModel viewModel, Guid id)
         {
             User user = _context.Users.Find(id);
+            UserDetail detail = _context.UserDetails.Find(id);
 
             if (user != null)
             {
                 user.RoleId = viewModel.RoleId;
                 user.UserName = viewModel.UserName;
                 user.IsActive = viewModel.IsActive;
+                detail.BirthDate = viewModel.BirthDate;
+                detail.FullName = viewModel.FullName;
 
                 if (GetRoleName(viewModel.RoleId) == "driver") {
                     if (!_context.Drivers.Any(d => d.UserId == id))
@@ -747,6 +750,63 @@ namespace Taxi.Core.Services.AdminPanel
         public async Task<Driver> GetDriver(Guid id)
         {
             return await _context.Drivers.FindAsync(id);
+        }
+
+        public bool UpdateDriverCertificate(Guid id, DriverImgViewModel viewModel)
+        {
+            Driver driver = _context.Drivers.Find(id);
+
+
+            if (viewModel.Img != null)
+            {
+                string strExt = Path.GetExtension(viewModel.Img.FileName).ToLower();
+                if (strExt != ".jpg")
+                {
+                    return false;
+                }
+                string filePath = "";
+
+                viewModel.ImgName = CodeGenerator.GetFileName() + strExt;
+                filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/driver", viewModel.ImgName);
+
+                using (var Stream = new FileStream(filePath, FileMode.Create))
+                {
+                    viewModel.Img.CopyTo(Stream);
+                }
+
+                if (driver.Avatar != null)
+                {
+                    File.Delete("wwwroot/img/driver" + driver.Avatar);
+                }
+
+               
+                driver.IsConfirm = viewModel.IsConfirm;
+                driver.CarImg = viewModel.ImgName;
+
+                _context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateDriverCar(Guid id, DriverCarViewModel viewModel)
+        {
+            Driver driver = _context.Drivers.Find(id);
+
+            driver.CarCode = viewModel.CarCode;
+            driver.CaraId = viewModel.CarId;
+            driver.CarColorId = viewModel.CarColorId;
+            _context.SaveChanges();
+            return true;
+
+        }
+
+        public async Task<UserDetail> GetUserDetail(Guid id)
+        {
+            return await _context.UserDetails.FindAsync(id);
         }
         #endregion
     }

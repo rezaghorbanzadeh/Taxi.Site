@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Taxi.Core.Interfaces;
@@ -18,7 +19,18 @@ builder.Services.AddScoped<IAccounting, AccouuntService>();
 builder.Services.AddScoped<IAdmin, AdminService>();
 
 #endregion
-
+#region 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.HttpOnly = true;
+        options.ExpireTimeSpan = TimeSpan.FromDays(30);
+        options.SlidingExpiration = true;
+        options.LoginPath = "Account/Register";
+        options.LogoutPath = "Account/SingOut";
+        options.AccessDeniedPath = "/";
+    });
+#endregion
 #region Config DataBase
 builder.Services.AddDbContext<DatabaseContext>(option =>
 {
@@ -40,7 +52,9 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseCookiePolicy();
 
+app.UseAuthorization();
 app.MapStaticAssets();
 
 app.MapControllers();
