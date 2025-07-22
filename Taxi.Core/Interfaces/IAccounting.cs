@@ -22,5 +22,8 @@ namespace Taxi.Core.Interfaces
         void UpdatePasswordGuid(Guid Id , string code);
 
         Task<User> ActiveCode(ActiveViewModel viewModel);
+
+
+        bool ChekUserRole(string role , string username);
     }
 }

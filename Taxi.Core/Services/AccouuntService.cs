@@ -44,6 +44,12 @@ namespace Taxi.Core.Services
             return _context.Users.Any( u => u.UserName == username);
         }
 
+        public bool ChekUserRole(string role, string username)
+        {
+            Role myRole = _context.Roles.SingleOrDefault(r=>r.Name == role);
+            return _context.Users.Any(u=>u.UserName == username && u.RoleId == myRole.Id);
+        }
+
         public void Dispose()
         {
             if (_context != null)

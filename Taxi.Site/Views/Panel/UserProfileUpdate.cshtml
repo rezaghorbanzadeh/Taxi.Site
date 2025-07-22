@@ -1,0 +1,31 @@
+﻿@model Taxi.Core.ViewModels.Panel.UserDetailProfileViewModel;
+
+@{
+	ViewData["Title"] = "سایت";
+	Layout = "~/Views/Shared/Panel/_PanelLayout.cshtml";
+}
+
+
+<div class="row">
+	<div class="col-xl">
+		<div class="card mb-4">
+			<div class="card-header d-flex justify-content-between align-items-center">
+				<small class="text-muted float-end"></small>
+			</div>
+			<div class="card-body">
+				<form method="post" asp-action="UserProfileUpdate" asp-controller="panel">
+					<div class="mb-3">
+						<label class="form-label" for="basic-default-fullname">نام خانوادگی</label>
+						<input name="FullName" type="text" class="form-control" id="basic-default-fullname" placeholder="مثال سمند " />
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="basic-default-fullname">تاریخ تولد</label>
+						<input name="BirthDate" type="text" class="form-control" id="basic-default-fullname" />
+					</div>
+					<button type="submit" class="btn btn-primary">ثبت</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>

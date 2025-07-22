@@ -95,7 +95,8 @@ namespace Taxi.Site.Controllers
                     };
 
                     await HttpContext.SignInAsync(principal, propertis);
-                    //
+                    
+                    return RedirectToAction("Dashbord","Panel");
                 }
             }
             return View(viewModel);

@@ -1,0 +1,162 @@
+﻿ @using Taxi.Core.Scopes 
+
+ @inject SiteScope _scope 
+
+@{ 
+    string userRole = _scope.GetUserRole(User.Identity.Name); 
+} 
+
+
+<!DOCTYPE html>
+
+<html lang="fa"
+class="light-style layout-menu-fixed"
+dir="rtl"
+data-theme="theme-default"
+data-assets-path="/AdminPanel/assets/"
+data-template="horizontal-menu-template">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>@ViewBag.Title</title>
+
+    <meta name="description" content="" />
+    <partial name="~/Views/Shared/Panel/_PanelStyle.cshtml" />
+
+    @RenderSection("styles",false)
+    <!-- Page CSS -->
+    <!-- Helpers -->
+    <!-- JS here -->
+    <partial name="~/Views/Shared/AdminPanel/_AdminScriptHead.cshtml" />
+
+    @RenderSection("scriptsHeads",false)
+</head>
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
+        <div class="layout-container">
+            <!-- Navbar -->
+            <partial name="~/Views/Shared/Panel/_PanelNavbar.cshtml" />
+            <!-- / Navbar -->
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Menu -->
+                    <partial name="~/Views/Shared/Panel/_LayoutPage.cshtml" />
+                    <!-- / Menu -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+
+
+                        <!-- Header -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card mb-4">
+                                    <div class="user-profile-header-banner">
+                                        <img src="/AdminPanel/assets/img/pages/profile-banner.png" alt="Banner image" class="rounded-top" />
+                                    </div>
+                                    <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
+                                        <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
+                                            <img src="/AdminPanel/assets/img/avatars/14.png"
+                                            alt="user image"
+                                            class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img" />
+                                        </div>
+                                        <div class="flex-grow-1 mt-3 mt-sm-5">
+                                            <div class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
+                                                <div class="user-profile-info">
+                                                    <h4>John Doe</h4>
+                                                    <ul class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
+                                                        <li class="list-inline-item"><i class="ti ti-color-swatch"></i> UX Designer</li>
+                                                        <li class="list-inline-item"><i class="ti ti-map-pin"></i> Vatican City</li>
+                                                        <li class="list-inline-item"><i class="ti ti-calendar"></i> Joined April 2021</li>
+                                                    </ul>
+                                                </div>
+                                                <a href="javascript:void(0)" class="btn btn-primary">
+                                                    <i class="ti ti-user-check me-1"></i>Connected
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ Header -->
+                        <!-- Navbar pills -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="nav nav-pills flex-column flex-sm-row mb-4">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="javascript:void(0);">
+                                            <i class="ti-xs ti ti-user-check me-1"></i> Profile
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="pages-profile-teams.html">
+                                            <i class="ti-xs ti ti-users me-1"></i> Teams
+                                        </a>
+                                    </li>
+                                    @if (userRole == "driver")
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="javascript:void(0);">
+                                                <i class="ti-xs ti ti-user-check me-1"></i> Profile</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="pages-profile-teams.html">
+                                                <i class="ti-xs ti ti-users me-1"></i> Teams</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="pages-profile-projects.html">
+                                                <i class="ti-xs ti ti-layout-grid me-1"></i> Projects</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="pages-profile-connections.html">
+                                                <i class="ti-xs ti ti-link me-1"></i> Connections</a>
+                                        </li>
+                                    }
+                                  
+                                  
+                                </ul>
+                            </div>
+                        </div>
+                        <!--/ Navbar pills -->
+                        @RenderBody()
+                    </div>
+
+                    <!-- Content -->
+                   
+
+                    <!--/ Content -->
+
+
+
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!--/ Content wrapper -->
+            </div>
+
+            <!--/ Layout container -->
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+
+    <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+    <div class="drag-target"></div>
+
+    <!--/ Layout wrapper -->
+    <!-- Core JS -->
+    <partial name="~/Views/Shared/Panel/_PanelScript.cshtml" />
+    @RenderSection("scripts", false)
+
+    <!-- Page JS -->
+  
+</body>
+</html>

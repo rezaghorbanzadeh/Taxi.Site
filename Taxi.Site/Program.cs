@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Taxi.Core.Interfaces;
 using Taxi.Core.Interfaces.Admin;
+using Taxi.Core.Scopes;
 using Taxi.Core.Services;
 using Taxi.Core.Services.AdminPanel;
 using Taxi.DataAccessLayer.Context;
@@ -17,6 +18,8 @@ IConfiguration configuration = new ConfigurationBuilder()
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IAccounting, AccouuntService>();
 builder.Services.AddScoped<IAdmin, AdminService>();
+builder.Services.AddScoped<IPanel, PanelService>();
+builder.Services.AddScoped<SiteScope>();
 
 #endregion
 #region 
@@ -26,8 +29,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.HttpOnly = true;
         options.ExpireTimeSpan = TimeSpan.FromDays(30);
         options.SlidingExpiration = true;
-        options.LoginPath = "Account/Register";
-        options.LogoutPath = "Account/SingOut";
+        options.LoginPath = "/Account/Register";
+        options.LogoutPath = "/Account/SingOut";
         options.AccessDeniedPath = "/";
     });
 #endregion
@@ -47,16 +50,16 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
 app.UseHttpsRedirection();
+
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseCookiePolicy();
 
-app.UseAuthorization();
 app.MapStaticAssets();
-
 app.MapControllers();
 
 app.MapControllerRoute(

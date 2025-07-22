@@ -39,5 +39,7 @@ namespace Taxi.DataAccessLayer.Entites
         [ForeignKey("RoleId")]
         public virtual Role Role { get; set; }
         public virtual Driver Driver { get; set; }
+
+        public virtual ICollection<Factor> Factors { get; set; }
     }
 }
