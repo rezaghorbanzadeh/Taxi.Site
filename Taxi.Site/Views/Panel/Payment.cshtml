@@ -1,0 +1,27 @@
+﻿@model Taxi.Core.ViewModels.Panel.FactorViewModel;
+
+@{
+	ViewData["Title"] = "سایت";
+	Layout = "~/Views/Shared/Panel/_PanelLayout.cshtml";
+}
+
+
+<div class="row">
+	<div class="col-xl">
+		<div class="card mb-4">
+			<div class="card-header d-flex justify-content-between align-items-center">
+				<small class="text-muted float-end"></small>
+			</div>
+			<div class="card-body">
+				<form method="post" asp-action="Payment">
+					<div class="mb-3">
+						<label class="form-label" for="basic-default-fullname">  مقدار </label>
+						<input name="Wallet" type="text" class="form-control" placeholder="مقدار به ریال " id="basic-default-fullname" />
+					</div>
+					<button type="submit" class="btn btn-primary">ثبت</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>

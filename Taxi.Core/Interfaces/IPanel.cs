@@ -12,9 +12,20 @@ namespace Taxi.Core.Interfaces
     public interface IPanel : IDisposable
     {
         Task<UserDetail> GetUserDetail(string username);
-
         string GetRoleName(string username);
-
         bool UpdateUserDetailProfile(Guid userId, UserDetailProfileViewModel viewModel);
+
+
+        #region Payment
+        void AddFactor(Factor factor);
+        bool UpdateFactor(Guid userId,string orderNumber, long Price);
+
+        Guid GetFactorById(string orderNumber);
+
+        Task<Factor>  GetFactor(Guid id);
+        void UpdatePayment(Guid Id, string date , string time , string desc, string bank
+            , string trace, string refId );
+        #endregion
+
     }
 }
