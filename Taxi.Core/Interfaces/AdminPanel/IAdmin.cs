@@ -112,7 +112,6 @@ namespace Taxi.Core.Interfaces.Admin
         bool DeleteRole(Guid id);
         #endregion
 
-
         #region User
 
         string GetRoleName(Guid id);
@@ -131,6 +130,23 @@ namespace Taxi.Core.Interfaces.Admin
         bool UpdateDriverProp(Guid id,DriverPropViewModel viewModel);
         bool UpdateDriverCertificate(Guid id,DriverImgViewModel viewModel);
         bool UpdateDriverCar(Guid id,DriverCarViewModel viewModel);
+        #endregion
+
+        #region Discounts
+        Task<List<Discount>> GetDiscounts();
+
+        Task<Discount> GetDiscountById(Guid id);
+
+        void AddDiscount(AdminDiscountsViewModel viewModel);
+        bool UpdateDiscount(Guid id, AdminDiscountsViewModel viewModel);
+
+        void DeleteDiscount(Guid id);
+        #endregion
+
+
+        #region Report
+        int WeeklyFactor(string data);
+
         #endregion
     }
 }

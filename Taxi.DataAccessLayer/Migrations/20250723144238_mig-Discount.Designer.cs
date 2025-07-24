@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Taxi.DataAccessLayer.Context;
 
@@ -11,9 +12,11 @@ using Taxi.DataAccessLayer.Context;
 namespace Taxi.DataAccessLayer.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250723144238_mig-Discount")]
+    partial class migDiscount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,12 +69,12 @@ namespace Taxi.DataAccessLayer.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Desc")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Desc")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Expire")
+                    b.Property<int>("Expire")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -84,9 +87,9 @@ namespace Taxi.DataAccessLayer.Migrations
                     b.Property<long>("Price")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Start")
+                    b.Property<int>("Start")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

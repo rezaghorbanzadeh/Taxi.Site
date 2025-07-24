@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Taxi.DataAccessLayer.Entites.CarColor>
+
+@{
+	ViewData["Title"] = "‌اضافه کردن  ماشین ";
+	Layout = "~/Views/Shared/AdminPanel/_AdminPanelLayout.cshtml";
+}
+<div class="content-wrapper">
+	<!-- Content -->
+
+	<div class="container-xxl flex-grow-1 container-p-y">
+		<div class="row">
+			<div class="col-xl">
+				<div class="card mb-4">
+					<div class="card-header d-flex justify-content-between align-items-center">
+						<small class="text-muted float-end">اضافه کردن </small>
+					</div>
+					<div class="card-body">
+						<form method="post" asp-action="Create" asp-asp-controller="Discount">
+							<div class="mb-3">
+								<label class="form-label" for="basic-default-fullname">نام ماشین</label>
+								<input name="Name" type="text" class="form-control" id="basic-default-fullname" placeholder="   عنوان " />
+							</div>		
+							<div class="mb-3">
+								<label class="form-label" for="basic-default-fullname">  کد تخقیق </label>
+								<input name="Code" type="text" class="form-control" id="basic-default-fullname" placeholder=" کد تخقیق   " />
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="basic-default-fullname">  مبلغ تخفیف </label>
+								<input name="Price" type="text" class="form-control" id="basic-default-fullname" placeholder=" مبلغ تخفیف   " />
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="basic-default-fullname">  درصد تخفیف</label>
+								<input name="Percent" type="text" class="form-control" id="basic-default-fullname" placeholder=" درصد تخفیف   " />
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="basic-default-fullname"> توضیحات  </label>
+								<input name="Desc" type="text" class="form-control" id="basic-default-fullname" placeholder="توضیحات  " />
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="basic-default-fullname">  شروع</label>
+								<input name="Start" type="text" class="form-control" id="basic-default-fullname" placeholder=" شروع    " />
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="basic-default-fullname">   پایان</label>
+								<input name="Expire" type="text" class="form-control" id="basic-default-fullname" placeholder="    " />
+							</div>			
+							<button type="submit" class="btn btn-primary">ثبت</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+

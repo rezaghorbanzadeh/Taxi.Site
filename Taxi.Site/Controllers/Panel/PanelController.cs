@@ -17,6 +17,13 @@ namespace Taxi.Site.Controllers.Panel
         {
             _panel = panel;
         }
+
+
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
+
         public  IActionResult Profile()
         {
             

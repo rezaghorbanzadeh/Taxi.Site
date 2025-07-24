@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -807,6 +808,69 @@ namespace Taxi.Core.Services.AdminPanel
         public async Task<UserDetail> GetUserDetail(Guid id)
         {
             return await _context.UserDetails.FindAsync(id);
+        }
+
+        public async Task<List<Discount>> GetDiscounts()
+        {
+            return await _context.Discounts.OrderBy(d=>d.Name).ToListAsync();
+        }
+
+        public async Task<Discount> GetDiscountById(Guid id)
+        {
+           return await _context.Discounts.FindAsync(id);
+        }
+
+        public void AddDiscount(AdminDiscountsViewModel viewModel)
+        {
+            Discount discount = new Discount()
+            {
+                Code = viewModel.Code,
+                Desc = viewModel.Desc,
+                Expire = viewModel.Expire,
+                Id = CodeGenerator.GetId(),
+                Name = viewModel.Name,
+                Percent = viewModel.Percent,
+                Price = viewModel.Price,
+                Start = viewModel.Start,
+            };
+            _context.Add(discount);
+            _context.SaveChanges();
+        }
+
+        public bool UpdateDiscount(Guid id, AdminDiscountsViewModel viewModel)
+        {
+            Discount discount = _context.Discounts.Find(id);
+            if (discount != null) {
+                discount.Code = viewModel.Code;
+                discount.Desc = viewModel.Desc;
+                discount.Expire = viewModel.Expire;
+                discount.Name = viewModel.Name;
+                discount.Percent = viewModel.Percent;
+                discount.Price = viewModel.Price;
+                discount.Start = viewModel.Start;
+
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public void DeleteDiscount(Guid id)
+        {
+            Discount discount = _context.Discounts.Find(id);
+
+            _context.Discounts.Remove(discount);
+            _context.SaveChanges();
+        }
+
+        public int WeeklyFactor(string data)
+        {
+            if (!_context.Factors.Any(f=>f.RefNumber != null && f.Date == data))
+            {
+                return 0;
+            }
+
+            return _context.Factors.Where(f => f.RefNumber != null && f.Date == data).ToList().Sum(f => f.Price);
         }
         #endregion
     }
