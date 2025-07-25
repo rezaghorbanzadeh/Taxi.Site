@@ -870,7 +870,7 @@ namespace Taxi.Core.Services.AdminPanel
                 return 0;
             }
 
-            return _context.Factors.Where(f => f.RefNumber != null && f.Date == data).ToList().Sum(f => f.Price);
+            return _context.Factors.Where(f => f.RefNumber != null && f.Date == date).ToList().Sum(f => f.Price);
         }
         #endregion
     }
