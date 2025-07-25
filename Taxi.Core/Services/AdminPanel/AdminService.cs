@@ -863,9 +863,9 @@ namespace Taxi.Core.Services.AdminPanel
             _context.SaveChanges();
         }
 
-        public int WeeklyFactor(string data)
+        public int WeeklyFactor(string date)
         {
-            if (!_context.Factors.Any(f=>f.RefNumber != null && f.Date == data))
+            if (!_context.Factors.Any(f=>f.RefNumber != null && f.Date == date))
             {
                 return 0;
             }

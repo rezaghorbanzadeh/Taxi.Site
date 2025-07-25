@@ -145,7 +145,7 @@ namespace Taxi.Core.Interfaces.Admin
 
 
         #region Report
-        int WeeklyFactor(string data);
+        int WeeklyFactor(string date);
 
         #endregion
     }

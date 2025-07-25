@@ -160,7 +160,7 @@ namespace Taxi.Site.Controllers.AdminPanel
 
                 strEndDate = pc.GetYear(dtA).ToString("0000") + "/" +
                     pc.GetMonth(dtA).ToString("00") + "/" + pc.GetDayOfMonth(dtA).ToString("00");
-
+                
                 ChartViewModel chartViewModel = new ChartViewModel()
                 {
                     Label = strEndDate,
