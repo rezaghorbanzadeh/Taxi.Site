@@ -3,10 +3,15 @@
 	Layout = "~/Views/Shared/Panel/_PanelLayout.cshtml";
 }
 
+@section styles{
+	<link rel="stylesheet" href="https://cdn.map.ir/web-sdk/1.4.2/css/mapp.min.css">
+	<link rel="stylesheet" href="https://cdn.map.ir/web-sdk/1.4.2/css/fa/style.css">
+}
+
 <div class="row">
 	<div class="col-xl">
 		<div class="mb-4">
-			<div id="map" style=" height: 500px;"></div>
+			<div id="app" style=" height: 500px;"></div>
 		</div>
 	</div>
 
@@ -15,34 +20,78 @@
 
 
 @section scripts{
+
+	<script type="text/javascript" src="https://cdn.map.ir/web-sdk/1.4.2/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="https://cdn.map.ir/web-sdk/1.4.2/js/mapp.env.js"></script>
+	<script type="text/javascript" src="https://cdn.map.ir/web-sdk/1.4.2/js/mapp.min.js"></script>
 	<script>
 
-		var mapOptions ={
-			center : [20,80],
-			zoom:15
-		}
+		$(document).ready(function() {
+		  var app = new Mapp({
+			  element: '#app',
+			  presets: {
+				  latlng: {
+					  lat: 32,
+					  lng: 52,
+				  },
+				  zoom: 10,
+			  },
+			  apiKey: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjJiOTdjNjg2ZmZlMTliZGE2ODkxZGQ1Mjc1N2VlMTJlZWRjZTFlYWMyNTQ3NmFjYzNhZmZkZWJkYTU0YmIzNThjYzU0ODYwYzllMDRhMDQ2In0.eyJhdWQiOiIzMzUyNyIsImp0aSI6IjJiOTdjNjg2ZmZlMTliZGE2ODkxZGQ1Mjc1N2VlMTJlZWRjZTFlYWMyNTQ3NmFjYzNhZmZkZWJkYTU0YmIzNThjYzU0ODYwYzllMDRhMDQ2IiwiaWF0IjoxNzUzNTQyNjgyLCJuYmYiOjE3NTM1NDI2ODIsImV4cCI6MTc1NjEzNDY4Miwic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.joWIfRl_S6NKorWNp9SzpqGnpTNfvSrqa4F1KibFlN7JBqhEuBUJlTjiY3EWufoc7IzNkQ9w-7nRUA0FcY3jWR8xOWidpGaESSch7aRe-k5S1MxTow8mWNl5AdCuF7GKM4ScUbmnw1NzA_bz82nDG3Uld-We8XBalccE3ICHbItElHOiPLg_ZM6g016Ha8cJ-gjaTr3k3Q0s7aZhg0u8aBe6IacLZzYl4spe2uE6Q-pYsaHXye_05a8WHVKGnx7BdrZpTFqIIaXdLIQ0tmt8CjwW9Xa8rkYHk8CvZipKLiXPHuE9oHh1sTWM5X7tE4-dXXBZ4KW6GKYqTE3entlSOA'
+		  });
+		  app.addLayers();
+
+		  // app.addGeolocation({
+			 //  history:true,
+			 //  onLoad:true,
+			 //  onLoadCallback:function(){
+				//   console.log(app.states.user.latlng)
+			 //  }
+		  // });
 
 
-		var map = new L.map('map',mapOptions);
+		  app.map.on('click',function(e){
+			  var marker = app.addMarker({
+				  name:'AddressMarker',
+				  latlng:{
+					  lat:e.latlng.lat,
+					  lng:e.latlng.lng,
+				  },
+				  icon: app.icons.red,
+				  popup:{
+					  title:{
+						  il8n:'MarkerTitle',
+					  },
+					  description:{
+							il8n:'MarkerDescription',
+					  },
+					  class:'marker-class',
+					  open:true,
+				  },
+				  pan:false,
+				  draggable:true,
+				  history:false,
+				  on:{
+					  click:function(){
 
-		var layer = new L.TileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png');
+					  }
+					  contextmenu:function(){
 
-		map.addLayer(layer);
-
-		var iconOptions = {
-			iconUrl:'/map/images/marker-icon.png',
-			iconSize:[50,50]
-		}
-		var firstIcon = L.icon(iconOptions);
-
-		var markerOptions ={
-			title:"First",
-			clickable:true,
-			draggable:true,
-			icon:firstIcon
-		}
-		var marker = L.marker([20,80],markerOptions);
-
-		marker.addTo(map);
+					  }
+				  }
+			  });
+			  app.showReverseGeocode({
+				   state:{
+					  latlng:{
+							lat:e.latlng.lat,
+							lng:e.latlng.lng,
+					  },
+					  zoom:15
+				  },
+				  
+			  });
+				 
+			  
+		  });
+		});
 	</script>
 }

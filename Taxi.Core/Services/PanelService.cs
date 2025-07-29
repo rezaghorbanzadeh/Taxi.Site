@@ -22,6 +22,7 @@ namespace Taxi.Core.Services
             _context = context;
         }
 
+
         public void AddFactor(Factor factor)
         {
             _context.Factors.Add(factor);
@@ -50,6 +51,7 @@ namespace Taxi.Core.Services
         {
             return _context.Users.Include(u=>u.Role).SingleOrDefault(u=>u.UserName == username).Role.Name;
         }
+
 
         public async Task<UserDetail> GetUserDetail(string username)
         {
@@ -102,5 +104,24 @@ namespace Taxi.Core.Services
         }
 
 
+        public void AddAddress(Guid userId, UserAddresse viewModel)
+        {
+           UserAddresse addresse = new UserAddresse()
+           {
+               Desc = viewModel.Desc,
+               Id = CodeGenerator.GetId(),
+               Lat= viewModel.Lat,
+               Lng= viewModel.Lng,
+               Title= viewModel.Title,
+           }; 
+
+            _context.Add(addresse);
+            _context.SaveChanges();
+        }
+
+        public async Task<List<UserAddresse>> GetUserAddresses(Guid id)
+        {
+            return await _context.UserAddresses.Where(a =>a.UserID == id).ToListAsync();
+        }
     }
 }

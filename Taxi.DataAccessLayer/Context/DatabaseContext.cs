@@ -15,6 +15,7 @@ namespace Taxi.DataAccessLayer.Context
         }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserAddresse> UserAddresses { get; set; }
         public DbSet<UserDetail> UserDetails { get; set; }
         public DbSet<Driver> Drivers{ get; set; }
         public DbSet<Discount> Discounts{ get; set; }

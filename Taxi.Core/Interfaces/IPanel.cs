@@ -16,6 +16,12 @@ namespace Taxi.Core.Interfaces
         bool UpdateUserDetailProfile(Guid userId, UserDetailProfileViewModel viewModel);
 
 
+        #region Addresses
+        Task<List<UserAddresse>> GetUserAddresses(Guid id);
+        void AddAddress(Guid userId, UserAddresse viewModel);
+
+        #endregion
+
         #region Payment
         void AddFactor(Factor factor);
         bool UpdateFactor(Guid userId,string orderNumber, long Price);

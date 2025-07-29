@@ -41,5 +41,6 @@ namespace Taxi.DataAccessLayer.Entites
         public virtual Driver Driver { get; set; }
 
         public virtual ICollection<Factor> Factors { get; set; }
+        public virtual ICollection<UserAddresse> UserAddresses { get; set; }
     }
 }
